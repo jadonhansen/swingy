@@ -2,9 +2,7 @@ package com.swingy.heroes;
 
 import com.swingy.artifacts.Artifact;
 import com.swingy.villains.Villain;
-import gameplay.Fight;
-import gameplay.Run;
-
+import com.swingy.gameplay.*;
 import java.util.ArrayList;
 
 public abstract class Hero {

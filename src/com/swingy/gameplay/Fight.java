@@ -1,4 +1,4 @@
-package gameplay;
+package com.swingy.gameplay;
 
 import com.swingy.artifacts.Artifact;
 import com.swingy.artifacts.Batmobile;
@@ -6,6 +6,8 @@ import com.swingy.heroes.Hero;
 import com.swingy.villains.Villain;
 
 public class Fight {
+
+    public Fight() {}
 
     public Hero fightVillain(Villain villain, Hero hero) {
 //        fighting algo
