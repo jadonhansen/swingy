@@ -1,23 +1,20 @@
-package com.swingy.gui;
+package com.swingy;
 
-import com.swingy.artifacts.Artifact;
-import com.swingy.artifacts.Batmobile;
-import com.swingy.artifacts.Hammer;
-import com.swingy.artifacts.Lightsaber;
-import com.swingy.heroes.Batman;
-import com.swingy.heroes.Hero;
-import com.swingy.heroes.Jedi;
-import com.swingy.heroes.Thor;
+import com.swingy.artifacts.*;
+import com.swingy.gui.Controller;
+import com.swingy.heroes.*;
 
 import java.io.*;
 import java.util.ArrayList;
 
-public class Options {
+public class Parsing {
 
     private static ArrayList<Hero> savedHeroes = new ArrayList<>();
 
-    public void characterOptions(int option) {
+    public void characters(int option) {
         getSavedCharacters();
+        Controller options = new Controller(savedHeroes, option);
+        options.displayOptions();
 
         for (Hero single: savedHeroes) {
             System.out.print(single.name + "\n");
@@ -27,22 +24,12 @@ public class Options {
             System.out.print(single.hitPoints + "\n");
             System.out.print(single.attack + "\n");
             System.out.print(single.defence + "\n");
-            System.out.print(single.artifacts.get(0).getAttack() + "\n");
-            System.out.print(single.artifacts.get(0).getDefense() + "\n");
-            System.out.print(single.artifacts.get(0).getHitPoints() + "\n");
+            for (Artifact hectic: single.artifacts) {
+                System.out.print(hectic.getAttack() + "\n");
+                System.out.print(hectic.getDefense() + "\n");
+                System.out.print(hectic.getHitPoints() + "\n");
+            }
         }
-//        print chars
-//        give options via gui
-    }
-
-    private void newCharacter() {
-//        makes new char
-//        generate map
-    }
-
-    private void savedCharacter() {
-//        copies over saved character to new hero var
-//        generate map
     }
 
     private void getSavedCharacters() {
@@ -53,9 +40,9 @@ public class Options {
             FileReader fr = new FileReader("saves.txt");
             BufferedReader bf = new BufferedReader(fr);
 
-            while((line = bf.readLine()) != null) {
+            while ((line = bf.readLine()) != null) {
 
-                while (line.equals("\n")) {
+                while (line.equals("")) {
                     line = bf.readLine();
                 }
                 try {
@@ -70,7 +57,7 @@ public class Options {
                     String[] hitPointsInc = line.split(":");
                     saveToLocal(details, artifactType, defenceInc, attackInc, hitPointsInc);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Error: " + e);
+                    System.out.println("Error in parsing.java: " + e);
                 }
             }
         } catch (FileNotFoundException e) {
@@ -88,6 +75,7 @@ public class Options {
             artifacts = null;
         } else {
             for (int i = 1; i < artifactType.length; i++) {
+
                 switch (artifactType[i]) {
                     case "Hammer" -> {
                         Artifact hammer = new Hammer(Integer.parseInt(attackInc[i]), 0, 0);
