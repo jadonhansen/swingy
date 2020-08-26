@@ -1,9 +1,13 @@
 package com.swingy.heroes;
 
+import com.swingy.artifacts.Artifact;
+
+import java.util.ArrayList;
+
 public class Batman extends Hero {
 
     // for generation of a saved hero
-    public Batman(int level, int xp) {
+    public Batman(int level, int xp, ArrayList<Artifact> artifacts) {
         name = "Batman";
         type = "Defender";
         attack = 4;
@@ -11,7 +15,7 @@ public class Batman extends Hero {
         hitPoints = 5;
         this.level = level;
         this.experience = xp;
-        // assign artifacts here  <----------
+        this.artifacts = artifacts;
     }
 
     // for generation of a new hero

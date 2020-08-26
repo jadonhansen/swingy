@@ -3,6 +3,26 @@ package com.swingy.artifacts;
 public class Hammer extends Weapon implements Artifact {
 
     public Hammer(int strength) {
-        super(strength);
+        //        determine algo for strength from villain
+        this.attackIncrease = strength;
+    }
+
+    public Hammer(int attack, int defense, int hitPoints) {
+        this.attackIncrease = attack;
+    }
+
+    @Override
+    public int getAttack() {
+        return attackIncrease;
+    }
+
+    @Override
+    public int getDefense() {
+        return defenceIncrease;
+    }
+
+    @Override
+    public int getHitPoints() {
+        return hitPointsIncrease;
     }
 }
