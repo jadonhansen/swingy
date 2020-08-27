@@ -24,10 +24,12 @@ public class Parsing {
             System.out.print(single.hitPoints + "\n");
             System.out.print(single.attack + "\n");
             System.out.print(single.defence + "\n");
-            for (Artifact hectic: single.artifacts) {
-                System.out.print(hectic.getAttack() + "\n");
-                System.out.print(hectic.getDefense() + "\n");
-                System.out.print(hectic.getHitPoints() + "\n");
+            if (single.artifacts != null) {
+                for (Artifact hectic: single.artifacts) {
+                    System.out.print(hectic.getAttack() + "\n");
+                    System.out.print(hectic.getDefense() + "\n");
+                    System.out.print(hectic.getHitPoints() + "\n");
+                }
             }
         }
     }
@@ -37,7 +39,7 @@ public class Parsing {
         String line;
 
         try {
-            FileReader fr = new FileReader("saves.txt");
+            FileReader fr = new FileReader("com/swingy/saves.txt");
             BufferedReader bf = new BufferedReader(fr);
 
             while ((line = bf.readLine()) != null) {
@@ -47,15 +49,19 @@ public class Parsing {
                 }
                 try {
                     String[] details = line.split(":");
-                    line = bf.readLine();
-                    String[] artifactType = line.split(":");
-                    line = bf.readLine();
-                    String[] defenceInc = line.split(":");
-                    line = bf.readLine();
-                    String[] attackInc = line.split(":");
-                    line = bf.readLine();
-                    String[] hitPointsInc = line.split(":");
-                    saveToLocal(details, artifactType, defenceInc, attackInc, hitPointsInc);
+                    if (details[4].equals("0")) {
+                        saveToLocal(details, null, null, null, null);
+                    } else {
+                        line = bf.readLine();
+                        String[] artifactType = line.split(":");
+                        line = bf.readLine();
+                        String[] defenceInc = line.split(":");
+                        line = bf.readLine();
+                        String[] attackInc = line.split(":");
+                        line = bf.readLine();
+                        String[] hitPointsInc = line.split(":");
+                        saveToLocal(details, artifactType, defenceInc, attackInc, hitPointsInc);
+                    }
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Error in parsing.java: " + e);
                 }

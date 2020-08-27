@@ -12,6 +12,11 @@ public class Batmobile extends Armor implements Artifact {
     }
 
     @Override
+    public String toString() {
+        return "Batmobile";
+    }
+
+    @Override
     public int getAttack() {
         return attackIncrease;
     }

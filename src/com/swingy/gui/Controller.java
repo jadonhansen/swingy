@@ -17,14 +17,15 @@ public class Controller {
     public void displayOptions() {
 
         Menu menu = new Menu();
-        int decision = menu.displayMenu(heroes);
+        String chosen = menu.displayMenu(heroes);
 
-        if (decision == (heroes.size() + 1)) {
-//            new char
-        } else {
-//            select char with index of 'decision'
-        }
-//        make villains, make map, display from there
+        System.out.println("here: " + chosen);
+//        if (decision == (heroes.size() + 1)) {
+////            new char
+//        } else {
+////            select char with index of 'decision'
+//        }
+////        make villains, make map, display from there
     }
 
 }
