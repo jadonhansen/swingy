@@ -21,6 +21,7 @@ public class Swingy {
                 model.setOption(1);
             } else {
                 System.out.println("Please provide a suitable option for running the game!\n'console' or 'gui'");
+                System.exit(1);
             }
 
             Controller controller = new Controller(model);

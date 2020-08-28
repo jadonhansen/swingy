@@ -13,22 +13,14 @@ public abstract class Hero {
     public int attack;
     public int defence;
     public int hitPoints;
+    public int[] currentPosition;
     public ArrayList<Artifact> artifacts;
 
-    public void fight(Villain villain) {
-        Fight fighting = new Fight();
-        Hero temp = fighting.fightVillain(villain, this);
-        this.level = temp.level;
-        this.experience = temp.experience;
-        this.artifacts = temp.artifacts;
+    public int[] getCurrentPosition() {
+        return currentPosition;
     }
 
-    public void run(Villain villain) {
-        Run running = new Run();
-        if (running.runCowardRun()) {
-//            if true then he returns to previous position
-        } else {
-            fight(villain);
-        }
+    public void setCurrentPosition(int[] currentPosition) {
+        this.currentPosition = currentPosition;
     }
 }
