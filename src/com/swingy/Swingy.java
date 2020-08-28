@@ -15,21 +15,17 @@ public class Swingy {
             Model model = new Model();
             model.setHeroes(characters);
 
-            Controller controller = new Controller(model);
-            controller.displayOptions();
-
             if (args[0].equals("console")) {
-                System.out.println("1" + model.getChosenHero());
-                System.out.println("2" + model.getHeroes());
-
-
+                model.setOption(0);
             } else if (args[0].equals("gui")) {
-                System.out.println("1" + model.getChosenHero());
-                System.out.println("2" + model.getHeroes());
-
+                model.setOption(1);
             } else {
                 System.out.println("Please provide a suitable option for running the game!\n'console' or 'gui'");
             }
+
+            Controller controller = new Controller(model);
+            controller.displayOptions();
+
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please provide a suitable option for running the game!\n'console' or 'gui'");
         }

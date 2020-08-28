@@ -20,6 +20,7 @@ public class Controller {
     // updates model to set chosen hero from menu view
     public void setChosenHero(Hero hero) {
         this.model.setChosenHero(hero);
+//        create map
     }
 
 }

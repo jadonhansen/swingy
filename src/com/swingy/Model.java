@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Model {
 
     private ArrayList<Hero> heroes;
+    private int option;
     private Hero chosenHero;
 
     public void setChosenHero(Hero chosen) {
@@ -15,6 +16,14 @@ public class Model {
 
     public Hero getChosenHero() {
         return chosenHero;
+    }
+
+    public void setOption(int option) {
+        this.option = option;
+    }
+
+    public int getOption() {
+        return option;
     }
 
     public void setHeroes(ArrayList<Hero> heroes) {
