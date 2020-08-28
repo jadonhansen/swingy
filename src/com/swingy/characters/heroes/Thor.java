@@ -1,17 +1,17 @@
-package com.swingy.heroes;
+package com.swingy.characters.heroes;
 
 import com.swingy.artifacts.Artifact;
 
 import java.util.ArrayList;
 
-public class Batman extends Hero {
+public class Thor extends Hero {
 
     // for generation of a saved hero
-    public Batman(int level, int xp, ArrayList<Artifact> artifacts) {
-        name = "Batman";
-        type = "Defender";
-        attack = 4;
-        defence = 6;
+    public Thor(int level, int xp, ArrayList<Artifact> artifacts) {
+        name = "Thor";
+        type = "Attacker";
+        attack = 6;
+        defence = 4;
         hitPoints = 5;
         this.level = level;
         this.experience = xp;
@@ -19,11 +19,11 @@ public class Batman extends Hero {
     }
 
     // for generation of a new hero
-    public Batman() {
-        name = "Batman";
-        type = "Protector";
-        attack = 4;
-        defence = 6;
+    public Thor() {
+        name = "Thor";
+        type = "Attacker";
+        attack = 6;
+        defence = 4;
         hitPoints = 5;
         level = 0;
         experience = 0;

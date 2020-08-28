@@ -1,7 +1,7 @@
-package com.swingy.heroes;
+package com.swingy.characters.heroes;
 
 import com.swingy.artifacts.Artifact;
-import com.swingy.villains.Villain;
+import com.swingy.characters.villains.Villain;
 import com.swingy.gameplay.*;
 import java.util.ArrayList;
 

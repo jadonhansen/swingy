@@ -1,4 +1,4 @@
-package com.swingy.villains;
+package com.swingy.characters.villains;
 
 public class Vader extends Villain {
 

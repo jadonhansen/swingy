@@ -1,6 +1,8 @@
-package com.swingy.gui;
+package com.swingy.view;
 
-import com.swingy.heroes.Hero;
+import com.swingy.Controller;
+import com.swingy.Model;
+import com.swingy.characters.heroes.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,9 +15,13 @@ public class Menu implements ActionListener {
     private static JPanel panel;
     private static JFrame frame;
     private static JLabel heading;
-    private static String chosen = null;
+    private Controller controller;
+    private Model model;
 
-    public String displayMenu(ArrayList<Hero> heroes) {
+    public void displayMenu(ArrayList<Hero> heroes, Controller controller, Model model) {
+
+        this.controller = controller;
+        this.model = model;
 
         panel = new JPanel();
         frame = new JFrame();
@@ -84,15 +90,18 @@ public class Menu implements ActionListener {
         }
 
         thor.addActionListener(e -> {
-            chosen = "Thor";
+            // contacts controller to set chosen hero
+            this.controller.setChosenHero(new Thor());
             frame.dispose();
         });
         jedi.addActionListener(e -> {
-            chosen = "Jedi";
+            // contacts controller to set chosen hero
+            this.controller.setChosenHero(new Jedi());
             frame.dispose();
         });
         batman.addActionListener(e -> {
-            chosen = "Batman";
+            // contacts controller to set chosen hero
+            this.controller.setChosenHero(new Batman());
             frame.dispose();
         });
 
@@ -100,15 +109,18 @@ public class Menu implements ActionListener {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
-        return chosen;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String[] btnText = e.getSource().toString().split(",");
         String[] text = btnText[btnText.length - 2].split(" ");
-        chosen = text[2];
+        String chosen = text[2];
+
+        int index = Integer.parseInt(String.valueOf(chosen.charAt(0)));
+
+        // contacts controller to set chosen hero
+        this.controller.setChosenHero(model.getHeroes().get(index));
         frame.dispose();
     }
 }

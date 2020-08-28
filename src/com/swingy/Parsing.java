@@ -1,8 +1,7 @@
 package com.swingy;
 
 import com.swingy.artifacts.*;
-import com.swingy.gui.Controller;
-import com.swingy.heroes.*;
+import com.swingy.characters.heroes.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,27 +10,28 @@ public class Parsing {
 
     private static ArrayList<Hero> savedHeroes = new ArrayList<>();
 
-    public void characters(int option) {
-        getSavedCharacters();
-        Controller options = new Controller(savedHeroes, option);
-        options.displayOptions();
+    public ArrayList<Hero> characters() {
 
-        for (Hero single: savedHeroes) {
-            System.out.print(single.name + "\n");
-            System.out.print(single.type + "\n");
-            System.out.print(single.experience + "\n");
-            System.out.print(single.level + "\n");
-            System.out.print(single.hitPoints + "\n");
-            System.out.print(single.attack + "\n");
-            System.out.print(single.defence + "\n");
-            if (single.artifacts != null) {
-                for (Artifact hectic: single.artifacts) {
-                    System.out.print(hectic.getAttack() + "\n");
-                    System.out.print(hectic.getDefense() + "\n");
-                    System.out.print(hectic.getHitPoints() + "\n");
-                }
-            }
-        }
+        getSavedCharacters();
+
+//        for (Hero single: savedHeroes) {
+//            System.out.print(single.name + "\n");
+//            System.out.print(single.type + "\n");
+//            System.out.print(single.experience + "\n");
+//            System.out.print(single.level + "\n");
+//            System.out.print(single.hitPoints + "\n");
+//            System.out.print(single.attack + "\n");
+//            System.out.print(single.defence + "\n");
+//            if (single.artifacts != null) {
+//                for (Artifact hectic: single.artifacts) {
+//                    System.out.print(hectic.getAttack() + "\n");
+//                    System.out.print(hectic.getDefense() + "\n");
+//                    System.out.print(hectic.getHitPoints() + "\n");
+//                }
+//            }
+//        }
+
+        return savedHeroes;
     }
 
     private void getSavedCharacters() {

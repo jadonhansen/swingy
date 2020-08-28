@@ -1,6 +1,6 @@
-package com.swingy.gui;
+package com.swingy.view;
 
-public class Generate {
+public class Map {
 
     private void generateMap(int option) {
 

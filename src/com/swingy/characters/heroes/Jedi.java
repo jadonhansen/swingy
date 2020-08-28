@@ -1,4 +1,4 @@
-package com.swingy.heroes;
+package com.swingy.characters.heroes;
 
 import com.swingy.artifacts.Artifact;
 

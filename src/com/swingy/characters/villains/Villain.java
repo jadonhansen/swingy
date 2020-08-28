@@ -1,4 +1,4 @@
-package com.swingy.villains;
+package com.swingy.characters.villains;
 
 public abstract class Villain {
 

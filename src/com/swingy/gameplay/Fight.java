@@ -2,8 +2,8 @@ package com.swingy.gameplay;
 
 import com.swingy.artifacts.Artifact;
 import com.swingy.artifacts.Batmobile;
-import com.swingy.heroes.Hero;
-import com.swingy.villains.Villain;
+import com.swingy.characters.heroes.Hero;
+import com.swingy.characters.villains.Villain;
 
 public class Fight {
 
