@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Controller {
 
     private final Model model;
+    private final Map map = new Map();
 
     public Controller(Model model) {
         this.model = model;
@@ -29,7 +30,6 @@ public class Controller {
 
     // updates model with new map which is being generated
     public void generateMap() {
-        Map map = new Map();
         model.setMap(map);
         map.generateMap(model, this);
     }
@@ -42,7 +42,7 @@ public class Controller {
     // retrieves outcome of the calculation of the move
     public boolean move(String newMove) {
         Move move = new Move();
-        return move.Move(model.getVillains(), model.getChosenHero());
+        return move.Move(model.getVillains(), model.getChosenHero()); //check if occupied and if boundry reached
     }
 
     // simulates a fight between villain and hero
@@ -57,7 +57,6 @@ public class Controller {
         if (!running.runCowardRun(villain, model.getChosenHero())) {
             fight(villain);
         }
-        // if he wins running away then nothing happens
     }
 
     // saves character stats to the file
