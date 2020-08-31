@@ -2,12 +2,8 @@ package com.swingy.view;
 
 import com.swingy.Controller;
 import com.swingy.Model;
-import com.swingy.characters.villains.Joker;
-import com.swingy.characters.villains.Ragnarok;
-import com.swingy.characters.villains.Vader;
-import com.swingy.characters.villains.Villain;
+import com.swingy.characters.villains.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -16,8 +12,8 @@ public class Map {
 
     private static char[][] mapArr;
     private static int mapSize;
-    private static ArrayList<Villain> villains = new ArrayList<>();
     private static int startPos;
+    private static ArrayList<Villain> villains = new ArrayList<>();
 
     public void generateMap(Model model, Controller controller) {
 
@@ -25,26 +21,26 @@ public class Map {
         mapSize = (level-1)*5+10-(level%2);
         mapArr = new char[mapSize][mapSize];
 
-        int numVillains = (int)Math.ceil(mapSize / 2);
-
-        startPos = (mapSize - 1)/ 2 - 1;
+        startPos = (mapSize - 1) / 2;
         model.getChosenHero().setCurrentPosition(startPos, startPos);
 
-        assignVillains(numVillains);
-
-        for (int i = 0; i < mapSize - 1; i++) {
-            for (int j = 0; j < mapSize - 1; j++) {
-                mapArr[i][j] = '-';
+        for (int i = 0; i < mapSize; i++) {
+            for (int j = 0; j < mapSize; j++) {
+                mapArr[i][j] = '+';
             }
         }
         mapArr[startPos][startPos] = 'H';
+        assignVillains();
 
-        System.out.println(level + "\n\n");
-        System.out.println(mapSize + "\n\n");
-        System.out.println(numVillains + "\n\n");
-        System.out.println(Arrays.toString(model.getChosenHero().getCurrentPosition()) + "\n\n");
-        for (int i = 0; i < mapSize - 1; i++) {
-            System.out.println(mapArr[i]);
+        System.out.println("Level: " + level);
+        System.out.println("Map size: " + mapSize);
+        System.out.println("Villains count: " + villains.size());
+        System.out.println("Hero position: " + Arrays.toString(model.getChosenHero().getCurrentPosition()));
+        for (int i = 0; i < mapSize; i++) {
+            System.out.println(Arrays.toString(mapArr[i])
+                    .replace('[', ' ')
+                    .replace(',', ' ')
+                    .replace(']', ' '));
         }
 
         if (model.getOption() == 1) {
@@ -57,58 +53,55 @@ public class Map {
 
     }
 
-    private void assignVillains(int num) {
+    private void assignVillains() {
+        int numVillains = mapSize;  //(int)Math.ceil(mapSize / 2) --> older algo
+        int i = 0;
+
         Random rand = new Random();
-        ArrayList<Integer> xCoords = new ArrayList<>();
-        ArrayList<Integer> yCoords = new ArrayList<>();
 
-        while (num != 0) {
-            int randomIndex = rand.nextInt(2);
+        while (i < numVillains) {
+            int randomVillain = rand.nextInt(2);
 
-            int randomX = rand.nextInt(mapSize - 1);
-            int randomY = rand.nextInt(mapSize - 1);
+            int randomX = rand.nextInt(mapSize);
+            int randomY = rand.nextInt(mapSize);
 
-            //NEED TO CREATE 2D ARRAY OF VILLAINS CAUSE NEED TO CHECK DOUBLE COORDINATE X AND Y
+            // make sure a villain & hero isn't on the same coordinate, then assign it if it's empty
+            if ((mapArr[randomX][randomY] != 'V' && mapArr[randomX][randomY] != 'R' && mapArr[randomX][randomY] != 'J' &&
+                    mapArr[startPos][startPos] != 'H') || mapArr[randomX][randomY] == '+') {
 
-
-            // checking to see if coordinate already taken
-            while (xCoords.contains(randomX)) {
-                randomX = rand.nextInt(mapSize - 1);
+                switch (randomVillain) {
+                    case 0 -> {
+                        villains.add(new Joker());
+                        villains.get(i).setCurrentPosition(randomX, randomY);
+                        mapArr[randomX][randomY] = 'J';
+                    }
+                    case 1 -> {
+                        villains.add(new Ragnarok());
+                        villains.get(i).setCurrentPosition(randomX, randomY);
+                        mapArr[randomX][randomY] = 'R';
+                    }
+                    case 2 -> {
+                        villains.add(new Vader());
+                        villains.get(i).setCurrentPosition(randomX, randomY);
+                        mapArr[randomX][randomY] = 'V';
+                    }
+                    default -> {
+                        villains.add(new Joker());
+                        villains.get(i).setCurrentPosition(randomX, randomY);
+                        mapArr[randomX][randomY] = 'J';
+                        System.out.println("Unknown random int attained - Map.java - assignVillains()\nContinuing.");
+                    }
+                }
+                i++;
             }
-            xCoords.add(randomX);
-            while (yCoords.contains(randomY)) {
-                randomY = rand.nextInt(mapSize - 1);
-            }
-            yCoords.add(randomY);
-
-            switch (randomIndex) {
-                case 0 -> {
-                    villains.add(new Joker());
-                    villains.get(num).setCurrentPosition(randomX, randomY);
-                }
-                case 1 -> {
-                    villains.add(new Ragnarok());
-                    villains.get(num).setCurrentPosition(randomX, randomY);
-                }
-                case 2 -> {
-                    villains.add(new Vader());
-                    villains.get(num).setCurrentPosition(randomX, randomY);
-                }
-                default -> {
-                    villains.add(new Joker());
-                    villains.get(num).setCurrentPosition(randomX, randomY);
-                    System.out.println("Unknown random int attained - Map.java - assignVillains()\nContinuing.");
-                }
-            }
-            num--;
         }
     }
 
     private void termGenerate() {
-
+        System.out.println("Terminal");
     }
 
     private void guiGenerate() {
-
+        System.out.println("GUI");
     }
 }
