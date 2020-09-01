@@ -55,20 +55,26 @@ public class Controller {
     // retrieves outcome of the calculation of the move
     public boolean move(String newMove) {
         Move move = new Move();
-        return move.move(model.getVillains(), model.getChosenHero(), newMove);
+        return move.move(model, newMove);
     }
 
     // simulates a fight between villain and hero
-    public void fight(Villain villain) {
-        Fight fighting = new Fight();
-        model.setChosenHero(fighting.fightVillain(villain, model.getChosenHero()));
+    public boolean fight() {
+        Fight fighting = new Fight(model);
+        if (fighting.fightVillain(model.getChosenHero())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // simulates a hero running away from a villain
-    public void run(Villain villain) {
-        Run running = new Run();
-        if (!running.runCowardRun(villain, model.getChosenHero())) {
-            fight(villain);
+    public boolean run() {
+        Run running = new Run(model);
+        if (running.runCowardRun(model.getChosenHero())) {
+            return true;
+        } else {
+            return false;
         }
     }
 

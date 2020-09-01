@@ -1,15 +1,12 @@
 package com.swingy.gameplay;
 
 import com.swingy.Model;
-import com.swingy.characters.heroes.Hero;
 import com.swingy.characters.villains.Villain;
-
-import java.util.ArrayList;
 
 public class Move {
 
     public boolean validateInput(String line) {
-        if (line.equals("W") || line.equals("A") || line.equals("S") || line.equals("D")) {
+        if (line.equals("w") || line.equals("a") || line.equals("s") || line.equals("d")) {
             return true;
         }
         return false;
@@ -25,28 +22,28 @@ public class Move {
         return false;
     }
 
-    public boolean move(ArrayList<Villain> villains, Hero hero, String newMove) {
+    public boolean move(Model model, String newMove) {
 
-        int[] currPos = hero.getCurrentPosition();
+        int[] currPos = model.getChosenHero().getCurrentPosition();
         int x;
         int y;
 
         switch (newMove) {
-            case "W" -> {
-                x = currPos[0];
-                y = currPos[1] + 1;
-            }
-            case "A" -> {
+            case "w" -> {
                 x = currPos[0] - 1;
                 y = currPos[1];
             }
-            case "S" -> {
+            case "a" -> {
                 x = currPos[0];
                 y = currPos[1] - 1;
             }
-            case "D" -> {
+            case "s" -> {
                 x = currPos[0] + 1;
                 y = currPos[1];
+            }
+            case "d" -> {
+                x = currPos[0];
+                y = currPos[1] + 1;
             }
             default -> {
                 x = currPos[0];
@@ -56,13 +53,22 @@ public class Move {
             }
         }
 
-        for (Villain villain: villains) {
+        for (Villain villain: model.getVillains()) {
             int[] pos = villain.getCurrentPosition();
 
             if (pos[0] == x && pos[1] == y) {
                 return false;
             }
         }
+
+        char[][] temp = model.getMap();
+        int[] position = model.getChosenHero().getCurrentPosition();
+
+        temp[position[0]][position[1]] = '+';
+        temp[x][y] = 'H';
+        model.setMap(temp);
+
+        model.getChosenHero().setCurrentPosition(x, y);
         return true;
     }
 }

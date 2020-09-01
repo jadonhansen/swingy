@@ -1,17 +1,22 @@
 package com.swingy.gameplay;
 
+import com.swingy.Model;
 import com.swingy.artifacts.*;
 import com.swingy.characters.heroes.Hero;
 import com.swingy.characters.villains.Villain;
 
 public class Fight {
 
-    public Fight() {}
+    private final Model model;
 
-    public Hero fightVillain(Villain villain, Hero hero) {
+    public Fight(Model model) {
+        this.model = model;
+    }
+
+    public boolean fightVillain(Hero hero) {
         //        fighting algo
         //        calls either win or lose
-        return hero;
+        return true; // if wins
     }
 
     private Hero win(Villain villain, Hero hero) {

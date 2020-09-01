@@ -4,7 +4,6 @@ import com.swingy.Controller;
 import com.swingy.Model;
 import com.swingy.gameplay.Move;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -13,31 +12,31 @@ public class Display {
     private final Model model;
     private final Controller controller;
 
+    private final String ANSI_RESET = "\u001B[0m";
+    private final String ANSI_RED = "\u001B[31m";
+    private final String ANSI_GREEN = "\u001B[32m";
+    private final String ANSI_YELLOW = "\u001B[33m";
+    private final String ANSI_CYAN = "\u001B[36m";
+
     public Display(Model model, Controller controller) {
         this.model = model;
         this.controller = controller;
     }
 
     public void consoleGenerate() {
-        printView();
-
         Move moving = new Move();
         Scanner scan = new Scanner(System.in);
 
         while (!(moving.reachedBorder(this.model))) {
             printView();
-            System.out.println("What's your next move? W/A/S/D");
+            System.out.println("\nWhat's your next move? w/a/s/d");
             String line = scan.nextLine();
 
             if (!(moving.validateInput(line))) {
-                System.out.println("Please use the characters 'W'/'A'/'S'/'D' to move.");
+                System.out.println("\nPlease use the characters 'w'/'a'/'s'/'d' to move.\n");
             } else {
-                if (controller.move(line)) {
-                    // alter array
-                    // save new coords for hero
-                } else {
-                    // fight/run
-                    // alter array based on outcome
+                if (!(controller.move(line))) {
+                    fightOrRun();
                 }
             }
             clearTerminal();
@@ -45,40 +44,88 @@ public class Display {
 
         if (moving.reachedBorder(this.model)) {
             clearTerminal();
-            // display winning view with new stats
-            // save stats to file
+            printHeader();
+            System.out.println(ANSI_RED + "You won this round!" + ANSI_RESET);
+            //controller.save();
         }
 
     }
 
     private void clearTerminal() {
-        try {
-            if (System.getProperty("os.name").contains("Windows"))
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            else
-                Runtime.getRuntime().exec("clear");
-        } catch (IOException | InterruptedException e) {
-            System.out.println("Error clearing console!");
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    private void fightOrRun() {
+        System.out.println("Be brave and face the villain? Press 'Y'\nRun to safety. Press 'N'");
+        Scanner input = new Scanner(System.in);
+        String ans = input.nextLine();
+        if (ans.equals("Y")) {
+            System.out.println("Epic battles ensues...");
+            boolean outcome = controller.fight();
+            // with outcome you decide if loses (quits) or wins (carries on - all new stats & array should be saved in fight class)
+        } else if (ans.equals("N")) {
+            if (!controller.run()) {
+                controller.fight();
+            }
+        } else {
+            System.out.println("Either 'Y' or 'N' is accepted as input!");
         }
     }
 
-
     private void printView() {
         char[][] temp = this.model.getMap();
+        String line;
 
-        // print header with stats
+        printHeader();
 
         try {
             for (char[] chars : temp) {
-                System.out.println(Arrays.toString(chars)
+
+                line = Arrays.toString(chars)
                         .replace('[', ' ')
                         .replace(',', ' ')
-                        .replace(']', ' '));
+                        .replace(']', ' ');
+
+                if (line.contains("H")) {
+                    String heroLine = "";
+
+                    for (char aChar : chars) {
+                        if (aChar == 'H') {
+                            heroLine += ANSI_RED + " H " + ANSI_RESET;
+                        } else {
+                            heroLine += " " + aChar + " ";
+                        }
+                    }
+                    System.out.println(heroLine);
+                } else {
+                    System.out.println(line);
+                }
             }
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             System.out.println("Error while displaying game interface: " + e);
         }
     }
+
+    public void printHeader() {
+        System.out.println(ANSI_CYAN + "*******************************************" + ANSI_RESET);
+        System.out.println(ANSI_CYAN + "*                                         *" + ANSI_RESET);
+        System.out.println(ANSI_CYAN + "*      Jadon Hansen - " + ANSI_GREEN + "SWINGY" + ANSI_RESET + ANSI_CYAN + " - 2020       *");
+        System.out.println(ANSI_CYAN + "*                                         *" + ANSI_RESET);
+        System.out.println(ANSI_CYAN + "*******************************************\n" + ANSI_RESET);
+        System.out.println("Hero: " + model.getChosenHero().getName() + " (" + model.getChosenHero().getType() + ")");
+        System.out.println("Level: " + model.getChosenHero().getLevel());
+        System.out.println("Experience: " + model.getChosenHero().getExperience());
+        System.out.println("Attack: " + model.getChosenHero().getAttack());
+        System.out.println("Defence: " + model.getChosenHero().getDefence());
+        System.out.println("Hit Points: " + model.getChosenHero().getHitPoints() + "");
+        if (model.getChosenHero().getArtifacts() != null) {
+            System.out.println("Artifacts: " + model.getChosenHero().getArtifacts().size() + "\n");
+        } else {
+            System.out.println("Artifacts: 0\n");
+        }
+    }
+
 
     public void guiGenerate() {
         System.out.println("GUI");
