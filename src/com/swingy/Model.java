@@ -2,7 +2,6 @@ package com.swingy;
 
 import com.swingy.characters.heroes.Hero;
 import com.swingy.characters.villains.Villain;
-import com.swingy.view.Map;
 
 import java.util.ArrayList;
 
@@ -11,15 +10,15 @@ public class Model {
     private ArrayList<Hero> heroes;
     private ArrayList<Villain> villains;
     private Hero chosenHero;
-    private Map map;
+    private char[][] mapArr;
     private int option;
 
     // map
-    public void setMap(Map map) {
-        this.map = map;
+    public void setMap(char[][] map) {
+        this.mapArr = map;
     }
-    public Map getMap() {
-        return map;
+    public char[][] getMap() {
+        return mapArr;
     }
 
     // chosen hero

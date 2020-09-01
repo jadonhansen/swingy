@@ -5,11 +5,11 @@ import com.swingy.Model;
 import com.swingy.characters.villains.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class Map {
 
+    private Controller controller;
     private static char[][] mapArr;
     private static int mapSize;
     private static int startPos;
@@ -17,7 +17,9 @@ public class Map {
 
     public void generateMap(Model model, Controller controller) {
 
-        int level= model.getChosenHero().level;
+        this.controller = controller;
+
+        int level= model.getChosenHero().getLevel();
         mapSize = (level-1)*5+10-(level%2);
         mapArr = new char[mapSize][mapSize];
 
@@ -32,25 +34,18 @@ public class Map {
         mapArr[startPos][startPos] = 'H';
         assignVillains();
 
-        System.out.println("Level: " + level);
-        System.out.println("Map size: " + mapSize);
-        System.out.println("Villains count: " + villains.size());
-        System.out.println("Hero position: " + Arrays.toString(model.getChosenHero().getCurrentPosition()));
-        for (int i = 0; i < mapSize; i++) {
-            System.out.println(Arrays.toString(mapArr[i])
-                    .replace('[', ' ')
-                    .replace(',', ' ')
-                    .replace(']', ' '));
-        }
+        model.setMap(mapArr);
 
-        if (model.getOption() == 1) {
-            guiGenerate();
-        } else if (model.getOption() == 0) {
-            termGenerate();
-        } else {
-            System.out.println("Invalid option has been found in Map class - generateMap.java");
-        }
-
+//        System.out.println("Level: " + level);
+//        System.out.println("Map size: " + mapSize);
+//        System.out.println("Villains count: " + villains.size());
+//        System.out.println("Hero position: " + Arrays.toString(model.getChosenHero().getCurrentPosition()));
+//        for (int i = 0; i < mapSize; i++) {
+//            System.out.println(Arrays.toString(mapArr[i])
+//                    .replace('[', ' ')
+//                    .replace(',', ' ')
+//                    .replace(']', ' '));
+//        }
     }
 
     private void assignVillains() {
@@ -89,19 +84,12 @@ public class Map {
                         villains.add(new Joker());
                         villains.get(i).setCurrentPosition(randomX, randomY);
                         mapArr[randomX][randomY] = 'J';
-                        System.out.println("Unknown random int attained - Map.java - assignVillains()\nContinuing.");
+                        System.out.println("Unknown random int attained -> Map.java -> assignVillains()\nContinuing.");
                     }
                 }
                 i++;
             }
         }
-    }
-
-    private void termGenerate() {
-        System.out.println("Terminal");
-    }
-
-    private void guiGenerate() {
-        System.out.println("GUI");
+        this.controller.setVillains(villains);
     }
 }

@@ -30,8 +30,8 @@ public class Controller {
 
     // updates model with new map which is being generated
     public void generateMap() {
-        model.setMap(map);
         map.generateMap(model, this);
+        displayGame();
     }
 
     // updates model with randomly generated villains
@@ -39,10 +39,23 @@ public class Controller {
         model.setVillains(villains);
     }
 
+    // takes generated map, hero, villain info and starts game
+    public void displayGame() {
+        Display display = new Display(model, this);
+
+        if (model.getOption() == 1) {
+            display.guiGenerate();
+        } else if (model.getOption() == 0) {
+            display.consoleGenerate();
+        } else {
+            System.out.println("Invalid option has been found -> Map.java -> generateMap()");
+        }
+    }
+
     // retrieves outcome of the calculation of the move
     public boolean move(String newMove) {
         Move move = new Move();
-        return move.Move(model.getVillains(), model.getChosenHero()); //check if occupied and if boundry reached
+        return move.move(model.getVillains(), model.getChosenHero(), newMove);
     }
 
     // simulates a fight between villain and hero

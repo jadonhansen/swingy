@@ -4,15 +4,47 @@ import com.swingy.artifacts.Artifact;
 import java.util.ArrayList;
 
 public abstract class Hero {
-    public String name;
-    public String type;
-    public int level;
-    public int experience;
-    public int attack;
-    public int defence;
-    public int hitPoints;
-    public int[] currentPosition = new int[2];
-    public ArrayList<Artifact> artifacts;
+    protected String name;
+    protected String type;
+    protected int level;
+    protected int experience;
+    protected int attack;
+    protected int defence;
+    protected int hitPoints;
+    protected int[] currentPosition = new int[2];
+    protected ArrayList<Artifact> artifacts;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public int getDefence() {
+        return defence;
+    }
+
+    public int getHitPoints() {
+        return hitPoints;
+    }
+
+    public ArrayList<Artifact> getArtifacts() {
+        return artifacts;
+    }
 
     public int[] getCurrentPosition() {
         return currentPosition;

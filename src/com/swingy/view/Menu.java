@@ -65,13 +65,13 @@ public class Menu implements ActionListener {
 
         try {
             for (int i = 0; i < heroes.size(); i++) {
-                JLabel label = new JLabel("<html>Name: " + heroes.get(i).name + "<br/>" +
-                        "Type: " + heroes.get(i).type + "<br/>" +
-                        "Level: " + heroes.get(i).level + "<br/>" +
-                        "Experience: " + heroes.get(i).experience + "<br/>" +
-                        "Attack Increase: " + heroes.get(i).attack + "<br/>" +
-                        "Defence Increase: " + heroes.get(i).defence + "<br/>" +
-                        "Hit Points Increase: " + heroes.get(i).hitPoints + "<br/>" +
+                JLabel label = new JLabel("<html>Name: " + heroes.get(i).getName() + "<br/>" +
+                        "Type: " + heroes.get(i).getType() + "<br/>" +
+                        "Level: " + heroes.get(i).getLevel() + "<br/>" +
+                        "Experience: " + heroes.get(i).getExperience() + "<br/>" +
+                        "Attack Increase: " + heroes.get(i).getAttack() + "<br/>" +
+                        "Defence Increase: " + heroes.get(i).getDefence() + "<br/>" +
+                        "Hit Points Increase: " + heroes.get(i).getHitPoints() + "<br/>" +
                         "</html>");
 
                 int k = i + 1;
@@ -80,7 +80,7 @@ public class Menu implements ActionListener {
                 label.setBounds(10, y, 200, 110);
                 panel.add(label);
 
-                JButton button = new JButton(heroes.get(i).name + " ID: " + i + heroes.get(i).experience);
+                JButton button = new JButton(heroes.get(i).getName() + " ID: " + i + heroes.get(i).getExperience());
                 button.addActionListener(this);
                 button.setBounds(10, y + 110, 150, 30);
                 panel.add(button);
