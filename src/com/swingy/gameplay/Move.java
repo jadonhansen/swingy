@@ -22,7 +22,7 @@ public class Move {
         return false;
     }
 
-    public boolean move(Model model, String newMove) {
+    public boolean possibleMove(Model model, String newMove) {
 
         int[] currPos = model.getChosenHero().getCurrentPosition();
         int x;
@@ -53,10 +53,11 @@ public class Move {
             }
         }
 
-        for (Villain villain: model.getVillains()) {
-            int[] pos = villain.getCurrentPosition();
+        for (Villain vill: model.getVillains()) {
+            int[] pos = vill.getCurrentPosition();
 
             if (pos[0] == x && pos[1] == y) {
+                model.setVillainToFight(vill);
                 return false;
             }
         }

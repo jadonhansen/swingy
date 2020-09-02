@@ -28,6 +28,7 @@ public class Display {
         Scanner scan = new Scanner(System.in);
 
         while (!(moving.reachedBorder(this.model))) {
+//            clearTerminal();
             printView();
             System.out.println("\nWhat's your next move? w/a/s/d");
             String line = scan.nextLine();
@@ -39,7 +40,6 @@ public class Display {
                     fightOrRun();
                 }
             }
-            clearTerminal();
         }
 
         if (moving.reachedBorder(this.model)) {
@@ -57,19 +57,31 @@ public class Display {
     }
 
     private void fightOrRun() {
-        System.out.println("Be brave and face the villain? Press 'Y'\nRun to safety. Press 'N'");
+        System.out.println("You have encountered a villain! To fight press 'Y'\nTo run to safety press 'N'");
         Scanner input = new Scanner(System.in);
         String ans = input.nextLine();
-        if (ans.equals("Y")) {
-            System.out.println("Epic battles ensues...");
-            boolean outcome = controller.fight();
-            // with outcome you decide if loses (quits) or wins (carries on - all new stats & array should be saved in fight class)
-        } else if (ans.equals("N")) {
-            if (!controller.run()) {
-                controller.fight();
-            }
-        } else {
-            System.out.println("Either 'Y' or 'N' is accepted as input!");
+
+        switch (ans) {
+            case "Y":
+                System.out.println("Epic battles ensues...");
+                if (controller.fight()) {
+                    System.out.println("You won this battle..but I'll be back!");
+                } else {
+                    clearTerminal();
+                    printHeader();
+                    System.out.println(ANSI_RED + "You lost this round, next time!" + ANSI_RESET);
+                    System.exit(1);
+                }
+                break;
+            case "N":
+                if (controller.run()) {
+                    System.out.println("You're one lucky guy!");
+                } else {
+                    controller.fight();
+                }
+                break;
+            default:
+                System.out.println("Either 'Y' or 'N' is accepted as input!");
         }
     }
 

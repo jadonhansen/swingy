@@ -9,6 +9,7 @@ public class Model {
 
     private ArrayList<Hero> heroes;
     private ArrayList<Villain> villains;
+    private Villain villainToFight;
     private Hero chosenHero;
     private char[][] mapArr;
     private int option;
@@ -51,5 +52,13 @@ public class Model {
     }
     public ArrayList<Villain> getVillains() {
         return villains;
+    }
+
+    // villain to fight
+    public void setVillainToFight(Villain villain) {
+        villainToFight = villain;
+    }
+    public Villain getVillainToFight() {
+        return villainToFight;
     }
 }
