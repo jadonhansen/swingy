@@ -55,7 +55,7 @@ public class Map {
         Random rand = new Random();
 
         while (i < numVillains) {
-            int randomVillain = rand.nextInt(2);
+            int randomVillain = rand.nextInt(3);
 
             int randomX = rand.nextInt(mapSize);
             int randomY = rand.nextInt(mapSize);

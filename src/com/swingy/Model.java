@@ -1,5 +1,6 @@
 package com.swingy;
 
+import com.swingy.artifacts.Artifact;
 import com.swingy.characters.heroes.Hero;
 import com.swingy.characters.villains.Villain;
 
@@ -11,6 +12,7 @@ public class Model {
     private ArrayList<Villain> villains;
     private Villain villainToFight;
     private Hero chosenHero;
+    private Artifact artifactDrop;
     private char[][] mapArr;
     private int option;
 
@@ -60,5 +62,13 @@ public class Model {
     }
     public Villain getVillainToFight() {
         return villainToFight;
+    }
+
+    // artifact drop
+    public void setArtifactDrop(Artifact artifactDrop) {
+        this.artifactDrop = artifactDrop;
+    }
+    public Artifact getArtifactDrop() {
+        return artifactDrop;
     }
 }

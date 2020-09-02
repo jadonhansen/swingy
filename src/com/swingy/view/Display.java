@@ -2,6 +2,7 @@ package com.swingy.view;
 
 import com.swingy.Controller;
 import com.swingy.Model;
+import com.swingy.artifacts.Artifact;
 import com.swingy.gameplay.Move;
 
 import java.util.Arrays;
@@ -26,6 +27,8 @@ public class Display {
     public void consoleGenerate() {
         Move moving = new Move();
         Scanner scan = new Scanner(System.in);
+
+        printHeader();
 
         while (!(moving.reachedBorder(this.model))) {
 //            clearTerminal();
@@ -57,7 +60,7 @@ public class Display {
     }
 
     private void fightOrRun() {
-        System.out.println("You have encountered a villain! To fight press 'Y'\nTo run to safety press 'N'");
+        System.out.println("You have encountered a villain! To fight press 'Y'\nTo attempt an escape press 'N'");
         Scanner input = new Scanner(System.in);
         String ans = input.nextLine();
 
@@ -66,6 +69,7 @@ public class Display {
                 System.out.println("Epic battles ensues...");
                 if (controller.fight()) {
                     System.out.println("You won this battle..but I'll be back!");
+                    artifactView();
                 } else {
                     clearTerminal();
                     printHeader();
@@ -77,7 +81,16 @@ public class Display {
                 if (controller.run()) {
                     System.out.println("You're one lucky guy!");
                 } else {
-                    controller.fight();
+                    System.out.println("You're going to have to fight me!");
+                    if (controller.fight()) {
+                        System.out.println("You won this battle..but I'll be back!");
+                        artifactView();
+                    } else {
+                        clearTerminal();
+                        printHeader();
+                        System.out.println(ANSI_RED + "You lost this round, next time!" + ANSI_RESET);
+                        System.exit(1);
+                    }
                 }
                 break;
             default:
@@ -85,11 +98,36 @@ public class Display {
         }
     }
 
+    private void artifactView() {
+        Scanner input = new Scanner(System.in);
+
+        if (model.getArtifactDrop() != null) {
+            Artifact art = model.getArtifactDrop();
+
+            System.out.println("\nArtifact dropped! Do you want to keep or drop the following artifact?\nPress 'Y' to keep and 'N' to drop.");
+            System.out.println("\nArtifact: " + art.toString() + "\nAttack Increase: " + art.getAttack());
+            System.out.println("Defence: " + art.getDefense() + "\nHit Points Increase: " + art.getHitPoints() + "\n");
+
+            String outcome = input.nextLine();
+            switch (outcome) {
+                case "Y":
+                    controller.addArtifact(art);
+                    System.out.println("Added '" + art.toString() + "' to inventory!");
+                    break;
+                case "N":
+                    System.out.println("No artifact gained!");
+                    break;
+                default:
+                    System.out.println("Either 'Y' or 'N' is accepted as input!");
+            }
+        }
+    }
+
     private void printView() {
         char[][] temp = this.model.getMap();
         String line;
 
-        printHeader();
+        printStats();
 
         try {
             for (char[] chars : temp) {
@@ -119,13 +157,8 @@ public class Display {
         }
     }
 
-    public void printHeader() {
-        System.out.println(ANSI_CYAN + "*******************************************" + ANSI_RESET);
-        System.out.println(ANSI_CYAN + "*                                         *" + ANSI_RESET);
-        System.out.println(ANSI_CYAN + "*      Jadon Hansen - " + ANSI_GREEN + "SWINGY" + ANSI_RESET + ANSI_CYAN + " - 2020       *");
-        System.out.println(ANSI_CYAN + "*                                         *" + ANSI_RESET);
-        System.out.println(ANSI_CYAN + "*******************************************\n" + ANSI_RESET);
-        System.out.println("Hero: " + model.getChosenHero().getName() + " (" + model.getChosenHero().getType() + ")");
+    public void printStats() {
+        System.out.println("\nHero: " + model.getChosenHero().getName() + " (" + model.getChosenHero().getType() + ")");
         System.out.println("Level: " + model.getChosenHero().getLevel());
         System.out.println("Experience: " + model.getChosenHero().getExperience());
         System.out.println("Attack: " + model.getChosenHero().getAttack());
@@ -136,6 +169,15 @@ public class Display {
         } else {
             System.out.println("Artifacts: 0\n");
         }
+    }
+
+    public void printHeader() {
+        System.out.println(ANSI_CYAN + "*******************************************" + ANSI_RESET);
+        System.out.println(ANSI_CYAN + "*                                         *" + ANSI_RESET);
+        System.out.println(ANSI_CYAN + "*      Jadon Hansen - " + ANSI_GREEN + "SWINGY" + ANSI_RESET + ANSI_CYAN + " - 2020       *");
+        System.out.println(ANSI_CYAN + "*                                         *" + ANSI_RESET);
+        System.out.println(ANSI_CYAN + "*******************************************\n" + ANSI_RESET);
+        printStats();
     }
 
 

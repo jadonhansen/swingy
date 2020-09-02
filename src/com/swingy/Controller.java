@@ -1,5 +1,6 @@
 package com.swingy;
 
+import com.swingy.artifacts.Artifact;
 import com.swingy.characters.heroes.Hero;
 import com.swingy.characters.villains.Villain;
 import com.swingy.gameplay.*;
@@ -60,7 +61,7 @@ public class Controller {
 
     // simulates a fight between villain and hero
     public boolean fight() {
-        Fight fighting = new Fight(model);
+        Fight fighting = new Fight(model, this);
         if (fighting.fightVillain()) {
             return true;
         } else {
@@ -70,11 +71,28 @@ public class Controller {
 
     // simulates a hero running away from a villain
     public boolean run() {
-        Run running = new Run(model);
+        Run running = new Run();
         if (running.runCowardRun()) {
             return true;
         } else {
             return false;
+        }
+    }
+
+    // if an artifact is gained and the user wants to keep it then it is added to the heroes artifact array
+    public void addArtifact(Artifact artifact) {
+        ArrayList<Artifact> temp = model.getChosenHero().getArtifacts();
+        temp.add(artifact);
+        model.getChosenHero().setArtifacts(temp);
+    }
+
+    // if a villain is defeated it is removed from the existing array
+    public void villainDefeated(Villain villain) {
+        ArrayList<Villain> temp = model.getVillains();
+        if (temp.remove(villain)) {
+            model.setVillains(temp);
+        } else {
+            System.out.println("Error removing villain: " + villain.toString());
         }
     }
 

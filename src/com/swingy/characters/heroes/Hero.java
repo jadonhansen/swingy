@@ -25,9 +25,15 @@ public abstract class Hero {
     public int getLevel() {
         return level;
     }
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
     public int getExperience() {
         return experience;
+    }
+    public void setExperience(int experience) {
+        this.experience = experience;
     }
 
     public int getAttack() {
@@ -45,11 +51,13 @@ public abstract class Hero {
     public ArrayList<Artifact> getArtifacts() {
         return artifacts;
     }
+    public void setArtifacts(ArrayList<Artifact> artifacts) {
+        this.artifacts = artifacts;
+    }
 
     public int[] getCurrentPosition() {
         return currentPosition;
     }
-
     public void setCurrentPosition(int x, int y) {
         currentPosition[0] = x;
         currentPosition[1] = y;
