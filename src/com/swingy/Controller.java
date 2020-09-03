@@ -82,6 +82,9 @@ public class Controller {
     // if an artifact is gained and the user wants to keep it then it is added to the heroes artifact array
     public void addArtifact(Artifact artifact) {
         ArrayList<Artifact> temp = model.getChosenHero().getArtifacts();
+        if (temp == null) {
+            temp = new ArrayList<>();
+        }
         temp.add(artifact);
         model.getChosenHero().setArtifacts(temp);
     }

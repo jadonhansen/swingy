@@ -31,16 +31,18 @@ public class Display {
         printHeader();
 
         while (!(moving.reachedBorder(this.model))) {
-//            clearTerminal();
             printView();
-            System.out.println("\nWhat's your next move? w/a/s/d");
+            System.out.println(ANSI_CYAN + "\nWhat's your next move? w/a/s/d" + ANSI_RESET);
             String line = scan.nextLine();
 
             if (!(moving.validateInput(line))) {
-                System.out.println("\nPlease use the characters 'w'/'a'/'s'/'d' to move.\n");
+                clearTerminal();
+                System.out.println(ANSI_YELLOW + "\nPlease use the characters 'w'/'a'/'s'/'d' to move.\n" + ANSI_RESET);
             } else {
                 if (!(controller.move(line))) {
                     fightOrRun();
+                } else {
+                    clearTerminal();
                 }
             }
         }
@@ -48,7 +50,8 @@ public class Display {
         if (moving.reachedBorder(this.model)) {
             clearTerminal();
             printHeader();
-            System.out.println(ANSI_RED + "You won this round!" + ANSI_RESET);
+            printStats();
+            System.out.println(ANSI_GREEN + "You won this round!" + ANSI_RESET);
             //controller.save();
         }
 
@@ -60,41 +63,41 @@ public class Display {
     }
 
     private void fightOrRun() {
-        System.out.println("You have encountered a villain! To fight press 'Y'\nTo attempt an escape press 'N'");
+        System.out.println(ANSI_CYAN + "You have encountered a villain! To fight press 'Y'. To attempt an escape press 'N'" + ANSI_RESET);
         Scanner input = new Scanner(System.in);
         String ans = input.nextLine();
 
+        while (!ans.equals("Y") && !ans.equals("N")) {
+            System.out.println(ANSI_YELLOW + "Either 'Y' or 'N' is accepted as input!" + ANSI_RESET);
+            ans = input.nextLine();
+        }
+
         switch (ans) {
             case "Y":
-                System.out.println("Epic battles ensues...");
-                if (controller.fight()) {
-                    System.out.println("You won this battle..but I'll be back!");
-                    artifactView();
-                } else {
-                    clearTerminal();
-                    printHeader();
-                    System.out.println(ANSI_RED + "You lost this round, next time!" + ANSI_RESET);
-                    System.exit(1);
-                }
+                System.out.println(ANSI_RED + "Epic battles ensues..." + ANSI_RESET);
+                fight();
                 break;
             case "N":
                 if (controller.run()) {
-                    System.out.println("You're one lucky guy!");
+                    System.out.println(ANSI_GREEN + "You're one lucky guy!\n" + ANSI_RESET);
                 } else {
-                    System.out.println("You're going to have to fight me!");
-                    if (controller.fight()) {
-                        System.out.println("You won this battle..but I'll be back!");
-                        artifactView();
-                    } else {
-                        clearTerminal();
-                        printHeader();
-                        System.out.println(ANSI_RED + "You lost this round, next time!" + ANSI_RESET);
-                        System.exit(1);
-                    }
+                    System.out.println(ANSI_RED + "You're going to have to fight me!" + ANSI_RESET);
+                    fight();
                 }
                 break;
-            default:
-                System.out.println("Either 'Y' or 'N' is accepted as input!");
+        }
+    }
+
+    private void fight() {
+        if (controller.fight()) {
+            System.out.println(ANSI_GREEN + "You won this battle..but I'll be back!\n" + ANSI_RESET);
+            artifactView();
+        } else {
+            clearTerminal();
+            printHeader();
+            printStats();
+            System.out.println(ANSI_RED + "You lost this round, next time!" + ANSI_RESET);
+            System.exit(1);
         }
     }
 
@@ -104,21 +107,23 @@ public class Display {
         if (model.getArtifactDrop() != null) {
             Artifact art = model.getArtifactDrop();
 
-            System.out.println("\nArtifact dropped! Do you want to keep or drop the following artifact?\nPress 'Y' to keep and 'N' to drop.");
+            System.out.println(ANSI_CYAN + "\nArtifact dropped! Do you want to keep or drop the following artifact?\nPress 'Y' to keep and 'N' to drop." + ANSI_RESET);
             System.out.println("\nArtifact: " + art.toString() + "\nAttack Increase: " + art.getAttack());
             System.out.println("Defence: " + art.getDefense() + "\nHit Points Increase: " + art.getHitPoints() + "\n");
 
             String outcome = input.nextLine();
+
+            while (!outcome.equals("Y") && !outcome.equals("N")) {
+                System.out.println(ANSI_YELLOW + "Either 'Y' or 'N' is accepted as input!" + ANSI_RESET);
+                outcome = input.nextLine();
+            }
+
             switch (outcome) {
-                case "Y":
+                case "Y" -> {
                     controller.addArtifact(art);
-                    System.out.println("Added '" + art.toString() + "' to inventory!");
-                    break;
-                case "N":
-                    System.out.println("No artifact gained!");
-                    break;
-                default:
-                    System.out.println("Either 'Y' or 'N' is accepted as input!");
+                    System.out.println(ANSI_GREEN + "Added '" + art.toString() + "' to inventory!" + ANSI_RESET);
+                }
+                case "N" -> System.out.println(ANSI_RED + "No artifact gained!" + ANSI_RESET);
             }
         }
     }
@@ -158,7 +163,7 @@ public class Display {
     }
 
     public void printStats() {
-        System.out.println("\nHero: " + model.getChosenHero().getName() + " (" + model.getChosenHero().getType() + ")");
+        System.out.println("Hero: " + model.getChosenHero().getName() + " (" + model.getChosenHero().getType() + ")");
         System.out.println("Level: " + model.getChosenHero().getLevel());
         System.out.println("Experience: " + model.getChosenHero().getExperience());
         System.out.println("Attack: " + model.getChosenHero().getAttack());
@@ -177,7 +182,6 @@ public class Display {
         System.out.println(ANSI_CYAN + "*      Jadon Hansen - " + ANSI_GREEN + "SWINGY" + ANSI_RESET + ANSI_CYAN + " - 2020       *");
         System.out.println(ANSI_CYAN + "*                                         *" + ANSI_RESET);
         System.out.println(ANSI_CYAN + "*******************************************\n" + ANSI_RESET);
-        printStats();
     }
 
 

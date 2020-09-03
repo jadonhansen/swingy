@@ -151,7 +151,7 @@ public class Fight {
                 break;
             }
             int temp = i - 1;
-            if ((i * 1000) + (Math.pow(temp, 2) * 450) <= model.getChosenHero().getExperience()) {
+            if (model.getChosenHero().getExperience() <= (int)((i * 1000) + (Math.pow(temp, 2) * 450))) {
                 model.getChosenHero().setLevel(i);
                 break;
             }
