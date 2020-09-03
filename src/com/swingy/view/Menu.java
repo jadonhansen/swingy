@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 public class Menu implements ActionListener {
 
-    private static JPanel panel;
-    private static JFrame frame;
-    private static JLabel heading;
+    private JPanel panel;
+    private JFrame frame;
+    private JLabel heading;
     private final Controller controller;
     private final Model model;
     private final ArrayList<Hero> heroes;

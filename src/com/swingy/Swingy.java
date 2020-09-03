@@ -27,7 +27,7 @@ public class Swingy {
             Controller controller = new Controller(model);
             controller.displayOptions();
 
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | NullPointerException e) {
             System.out.println("Please provide a suitable option for running the game!\n'console' or 'gui'");
         }
     }

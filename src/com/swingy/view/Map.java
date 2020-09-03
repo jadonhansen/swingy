@@ -10,10 +10,10 @@ import java.util.Random;
 public class Map {
 
     private Controller controller;
-    private static char[][] mapArr;
-    private static int mapSize;
-    private static int startPos;
-    private static ArrayList<Villain> villains = new ArrayList<>();
+    private char[][] mapArr;
+    private int mapSize;
+    private int startPos;
+    private ArrayList<Villain> villains = new ArrayList<>();
 
     public void generateMap(Model model, Controller controller) {
 

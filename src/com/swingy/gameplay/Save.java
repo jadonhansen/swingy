@@ -1,9 +1,7 @@
 package com.swingy.gameplay;
 
-import com.swingy.artifacts.Artifact;
 import com.swingy.characters.heroes.Hero;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,19 +21,15 @@ public class Save {
             }
         }
         if (!replaced) {
-            System.out.println("Error finding chosen hero with ID: '" + chosenHero.getID() + "' -> Save.java -> saveCharacter()");
+            heroes.add(chosenHero);
         }
 
         line = generateLine(heroes);
 
         try {
-            File saveFile = new File("saves.txt");
-            saveFile.createNewFile();
-
             FileWriter fw = new FileWriter("saves.txt");
             fw.write(line);
             fw.close();
-
         } catch (IOException e) {
             System.out.print("Error while saving to saves.txt -> Save.java -> Save(): " + e);
         }
@@ -43,33 +37,56 @@ public class Save {
 
     private String generateLine(ArrayList<Hero> heroes) {
         String line = "";
+        int j = 0;
 
         for (Hero hero: heroes) {
-            line += "Details:" + hero.getName() + ":" + hero.getLevel() + ":" + hero.getExperience() + ":" +
-                    hero.getArtifacts().size() + ":" + hero.getID() + "\n";
+            j++;
+            if (hero.getArtifacts() != null) {
+                line += "Details:" + hero.getName() + ":" + hero.getLevel() + ":" + hero.getExperience() + ":" +
+                        hero.getArtifacts().size() + ":" + hero.getID() + "";
 
-            line += "artifactType:";
-            for (int i = 0; i < hero.getArtifacts().size(); i++) {
-                if (i == hero.getArtifacts().size() - 1) {
-                    line += hero.getArtifacts().get(i).toString();
-                } else {
-                    line += hero.getArtifacts().get(i).toString() + ":";
+                line += "\nartifactType:";
+                for (int i = 0; i < hero.getArtifacts().size(); i++) {
+                    if (i == hero.getArtifacts().size() - 1) {
+                        line += hero.getArtifacts().get(i).toString();
+                    } else {
+                        line += hero.getArtifacts().get(i).toString() + ":";
+                    }
                 }
-            }
 
-            line += "\ndefenceIncrease:";
-            for (Artifact art: hero.getArtifacts()) {
-                line += art.getDefense() + ":";
+                line += "\ndefenceIncrease:";
+                for (int i = 0; i < hero.getArtifacts().size(); i++) {
+                    if (i == hero.getArtifacts().size() - 1) {
+                        line += hero.getArtifacts().get(i).getDefense();
+                    } else {
+                        line += hero.getArtifacts().get(i).getDefense() + ":";
+                    }
+                }
+
+                line += "\nattackIncrease:";
+                for (int i = 0; i < hero.getArtifacts().size(); i++) {
+                    if (i == hero.getArtifacts().size() - 1) {
+                        line += hero.getArtifacts().get(i).getAttack();
+                    } else {
+                        line += hero.getArtifacts().get(i).getAttack() + ":";
+                    }
+                }
+
+                line += "\nhitPointsIncrease:";
+                for (int i = 0; i < hero.getArtifacts().size(); i++) {
+                    if (i == hero.getArtifacts().size() - 1) {
+                        line += hero.getArtifacts().get(i).getHitPoints();
+                    } else {
+                        line += hero.getArtifacts().get(i).getHitPoints() + ":";
+                    }
+                }
+            } else {
+                line += "Details:" + hero.getName() + ":" + hero.getLevel() + ":" + hero.getExperience() + ":" +
+                        0 + ":" + hero.getID() + "";
             }
-            line += "\nattackIncrease:";
-            for (Artifact art: hero.getArtifacts()) {
-                line += art.getAttack() + ":";
+            if (j < heroes.size()) {
+                line += "\n\n";
             }
-            line += "\nhitPointsIncrease:";
-            for (Artifact art: hero.getArtifacts()) {
-                line += art.getHitPoints() + ":";
-            }
-            line += "\n\n";
         }
         return line;
     }

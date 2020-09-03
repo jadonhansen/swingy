@@ -4,21 +4,14 @@ defenceIncrease:0:0
 attackIncrease:2:0
 hitPointsIncrease:0:1
 
-
-
-
 Details:Batman:2:2800:1:245
 artifactType:Hammer
 defenceIncrease:0
 attackIncrease:2
 hitPointsIncrease:0
 
-Details:Jedi:3:4800:3:8565
-artifactType:Hammer:Lightsaber:Hammer
-defenceIncrease:0:0:0
-attackIncrease:2:0:3
-hitPointsIncrease:0:1:0
+
+Details:Jedi:3:4800:0:8565
 
 
-
-Details:Jedi:1:100:0:45767
+Details:Batman:1:200:0:1599143290

@@ -8,13 +8,14 @@ import java.util.ArrayList;
 
 public class Parsing {
 
-    private static ArrayList<Hero> savedHeroes = new ArrayList<>();
+    private ArrayList<Hero> savedHeroes = new ArrayList<>();
 
     public ArrayList<Hero> characters() {
 
         getSavedCharacters();
 
 //        for (Hero single: savedHeroes) {
+//            System.out.print(single.getID() + "\n");
 //            System.out.print(single.getName() + "\n");
 //            System.out.print(single.getType() + "\n");
 //            System.out.print(single.getExperience() + "\n");
@@ -40,7 +41,7 @@ public class Parsing {
         String line;
 
         try {
-            FileReader fr = new FileReader("com/swingy/saves.txt");
+            FileReader fr = new FileReader("saves.txt");
             BufferedReader bf = new BufferedReader(fr);
 
             while ((line = bf.readLine()) != null) {
@@ -67,8 +68,10 @@ public class Parsing {
                     System.out.println("Error -> Parsing.java -> getSavedCharacters(): " + e);
                 }
             }
+            fr.close();
+            bf.close();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + e);
+            System.out.println("No saves file found, continuing.");
         } catch (IOException e) {
             System.out.println("Error reading file: " + e);
         }
