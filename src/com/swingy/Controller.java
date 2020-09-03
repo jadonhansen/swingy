@@ -40,16 +40,17 @@ public class Controller {
         model.setVillains(villains);
     }
 
-    // takes generated map, hero, villain info and starts game
+    // starts game
     public void displayGame() {
-        Display display = new Display(model, this);
-
         if (model.getOption() == 1) {
-            display.guiGenerate();
+            Modern modern = new Modern(model, this);
+            modern.guiGenerate();
         } else if (model.getOption() == 0) {
+            Display display = new Display(model, this);
             display.consoleGenerate();
         } else {
             System.out.println("Invalid option has been found -> Map.java -> generateMap()");
+            System.exit(1);
         }
     }
 
@@ -79,7 +80,7 @@ public class Controller {
         }
     }
 
-    // if an artifact is gained and the user wants to keep it then it is added to the heroes artifact array
+    // if an artifact is gained & the user wants to keep it then it is added to the heroes artifact array
     public void addArtifact(Artifact artifact) {
         ArrayList<Artifact> temp = model.getChosenHero().getArtifacts();
         if (temp == null) {
@@ -102,6 +103,19 @@ public class Controller {
     // saves character stats to the file
     public void save() {
         Save save = new Save();
-        save.saveCharacter(model.getChosenHero());
+        save.saveCharacter(model.getChosenHero(), model.getHeroes());
+        newGame();
+    }
+
+    public void newGame() {
+        Parsing parse = new Parsing();
+        ArrayList<Hero> characters = parse.characters();
+        model.setHeroes(characters);
+        model.setMap(null);
+        model.setVillains(null);
+        model.setChosenHero(null);
+        model.setArtifactDrop(null);
+        model.setVillainToFight(null);
+        displayOptions();
     }
 }

@@ -111,20 +111,21 @@ public class Fight {
         return extraPoints;
     }
 
+    // altering level, experience, hero position and map after a win
     private void win() {
         int xp;
         if (villainToFight.getPower() <= 50) {
-            xp = 100;
+            xp = 50;
             levelUp(xp);
             artifactChance();
 
         } else if (villainToFight.getPower() <= 65) {
-            xp = 150;
+            xp = 100;
             levelUp(xp);
             artifactChance();
 
         } else if (villainToFight.getPower() <= 80) {
-            xp = 250;
+            xp = 200;
             levelUp(xp);
             artifactChance();
 

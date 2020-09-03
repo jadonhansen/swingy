@@ -86,23 +86,20 @@ public class Menu implements ActionListener {
                 panel.add(button);
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Error while making labels in Menu.java: " + e);
+            System.out.println("Error while making labels -> Menu.java -> displayMenu(): " + e);
         }
 
         thor.addActionListener(e -> {
-            // contacts controller to set chosen hero
-            this.controller.setChosenHero(new Thor());
             frame.dispose();
+            this.controller.setChosenHero(new Thor());
         });
         jedi.addActionListener(e -> {
-            // contacts controller to set chosen hero
-            this.controller.setChosenHero(new Jedi());
             frame.dispose();
+            this.controller.setChosenHero(new Jedi());
         });
         batman.addActionListener(e -> {
-            // contacts controller to set chosen hero
-            this.controller.setChosenHero(new Batman());
             frame.dispose();
+            this.controller.setChosenHero(new Batman());
         });
 
         frame.setPreferredSize(new Dimension(600, 700));
@@ -119,8 +116,8 @@ public class Menu implements ActionListener {
 
         int index = Integer.parseInt(String.valueOf(chosen.charAt(0)));
 
-        // contacts controller to set chosen hero
-        this.controller.setChosenHero(model.getHeroes().get(index));
         frame.dispose();
+
+        this.controller.setChosenHero(model.getHeroes().get(index));
     }
 }

@@ -18,6 +18,7 @@ public class Display {
     private final String ANSI_GREEN = "\u001B[32m";
     private final String ANSI_YELLOW = "\u001B[33m";
     private final String ANSI_CYAN = "\u001B[36m";
+    private boolean lost = false;
 
     public Display(Model model, Controller controller) {
         this.model = model;
@@ -30,9 +31,9 @@ public class Display {
 
         printHeader();
 
-        while (!(moving.reachedBorder(this.model))) {
+        while (!(moving.reachedBorder(this.model)) && !lost) {
             printView();
-            System.out.println(ANSI_CYAN + "\nWhat's your next move? w/a/s/d" + ANSI_RESET);
+            System.out.println(ANSI_CYAN + "\nWhat's your next move? w/a/s/d (Press ctrl+c to exit)" + ANSI_RESET);
             String line = scan.nextLine();
 
             if (!(moving.validateInput(line))) {
@@ -51,13 +52,14 @@ public class Display {
             clearTerminal();
             printHeader();
             printStats();
-            System.out.println(ANSI_GREEN + "You won this round!" + ANSI_RESET);
-            //controller.save();
+            System.out.println(ANSI_GREEN + "You won this round!\n" + ANSI_RESET);
+            System.out.println(ANSI_YELLOW + "Go to the menu to start on a new map." + ANSI_RESET);
         }
+        controller.save();
 
     }
 
-    private void clearTerminal() {
+    public void clearTerminal() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
@@ -97,7 +99,7 @@ public class Display {
             printHeader();
             printStats();
             System.out.println(ANSI_RED + "You lost this round, next time!" + ANSI_RESET);
-            System.exit(1);
+            lost = true;
         }
     }
 
@@ -162,7 +164,7 @@ public class Display {
         }
     }
 
-    public void printStats() {
+    private void printStats() {
         System.out.println("Hero: " + model.getChosenHero().getName() + " (" + model.getChosenHero().getType() + ")");
         System.out.println("Level: " + model.getChosenHero().getLevel());
         System.out.println("Experience: " + model.getChosenHero().getExperience());
@@ -176,16 +178,11 @@ public class Display {
         }
     }
 
-    public void printHeader() {
+    private void printHeader() {
         System.out.println(ANSI_CYAN + "*******************************************" + ANSI_RESET);
         System.out.println(ANSI_CYAN + "*                                         *" + ANSI_RESET);
         System.out.println(ANSI_CYAN + "*      Jadon Hansen - " + ANSI_GREEN + "SWINGY" + ANSI_RESET + ANSI_CYAN + " - 2020       *");
         System.out.println(ANSI_CYAN + "*                                         *" + ANSI_RESET);
         System.out.println(ANSI_CYAN + "*******************************************\n" + ANSI_RESET);
-    }
-
-
-    public void guiGenerate() {
-        System.out.println("GUI");
     }
 }
