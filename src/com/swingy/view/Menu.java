@@ -15,14 +15,17 @@ public class Menu implements ActionListener {
     private static JPanel panel;
     private static JFrame frame;
     private static JLabel heading;
-    private Controller controller;
-    private Model model;
+    private final Controller controller;
+    private final Model model;
+    private final ArrayList<Hero> heroes;
 
-    public void displayMenu(ArrayList<Hero> heroes, Controller controller, Model model) {
-
+    public Menu(ArrayList<Hero> heroes, Controller controller, Model model) {
         this.controller = controller;
         this.model = model;
+        this.heroes = heroes;
+    }
 
+    public void displayMenu() {
         panel = new JPanel();
         frame = new JFrame();
         frame.setSize(600, 500);
@@ -43,22 +46,22 @@ public class Menu implements ActionListener {
         JButton batman = new JButton("Batman");
         JButton jedi = new JButton("Jedi");
         JLabel create = new JLabel("Create a new character:");
-        JLabel exist = new JLabel("Load an existing character:");
         if (heroes.size() > 0) {
-            create.setBounds(250, 30, 150, 30);
+            JLabel exist = new JLabel("Load an existing character:");
             exist.setBounds(10, 30, 200, 30);
+            panel.add(exist);
+
+            create.setBounds(250, 30, 150, 30);
             thor.setBounds(250, 60, 100, 30);
             batman.setBounds(250, 90, 100, 30);
             jedi.setBounds(250, 120, 100, 30);
         } else {
-            create.setBounds(250, 30, 150, 30);
-            exist.setBounds(10, 30, 200, 30);
+            create.setBounds(10, 30, 150, 30);
             thor.setBounds(10, 60, 150, 30);
             batman.setBounds(10, 90, 150, 30);
             jedi.setBounds(10, 120, 150, 30);
         }
         panel.add(create);
-        panel.add(exist);
         panel.add(thor);
         panel.add(batman);
         panel.add(jedi);
@@ -80,7 +83,7 @@ public class Menu implements ActionListener {
                 label.setBounds(10, y, 200, 110);
                 panel.add(label);
 
-                JButton button = new JButton(heroes.get(i).getName() + " ID: " + i + heroes.get(i).getExperience());
+                JButton button = new JButton(heroes.get(i).getName() + " ID: " + heroes.get(i).getID());
                 button.addActionListener(this);
                 button.setBounds(10, y + 110, 150, 30);
                 panel.add(button);
@@ -110,14 +113,28 @@ public class Menu implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String[] btnText = e.getSource().toString().split(",");
-        String[] text = btnText[btnText.length - 2].split(" ");
-        String chosen = text[2];
+        try {
+            String[] btnText = e.getSource().toString().split(",");
+            String[] text = btnText[btnText.length - 2].split(" ");
+            String chosen = text[2];
+            int index = Integer.parseInt(chosen);
+            boolean notFound = true;
 
-        int index = Integer.parseInt(String.valueOf(chosen.charAt(0)));
+            frame.dispose();
 
-        frame.dispose();
+            for (Hero heroTobe: heroes) {
+                if (heroTobe.getID() == index) {
+                    this.controller.setChosenHero(heroTobe);
+                    notFound = false;
+                    break;
+                }
+            }
+            if (notFound) {
+                System.out.println("Character with ID of '" + index + "' was not found! -> Menu.java -> actionPerformed()");
+            }
+        } catch (IndexOutOfBoundsException | NullPointerException r) {
+            System.out.println("Error while assigning chosen character -> Menu.java -> actionPerformed(): " + r);
+        }
 
-        this.controller.setChosenHero(model.getHeroes().get(index));
     }
 }

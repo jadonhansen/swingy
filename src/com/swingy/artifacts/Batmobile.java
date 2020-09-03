@@ -3,7 +3,6 @@ package com.swingy.artifacts;
 public class Batmobile extends Armor implements Artifact {
 
     public Batmobile(int strength) {
-//        determine algo for strength from villain
         this.defenceIncrease = strength;
     }
 

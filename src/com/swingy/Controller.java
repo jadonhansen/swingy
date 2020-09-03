@@ -19,8 +19,8 @@ public class Controller {
 
     // calls menu view to display saved heroes
     public void displayOptions() {
-        Menu menu = new Menu();
-        menu.displayMenu(model.getHeroes(), this, model);
+        Menu menu = new Menu(model.getHeroes(), this, model);
+        menu.displayMenu();
     }
 
     // updates model to set chosen hero from menu view
@@ -46,8 +46,8 @@ public class Controller {
             Modern modern = new Modern(model, this);
             modern.guiGenerate();
         } else if (model.getOption() == 0) {
-            Display display = new Display(model, this);
-            display.consoleGenerate();
+            Retro retro = new Retro(model, this);
+            retro.consoleGenerate();
         } else {
             System.out.println("Invalid option has been found -> Map.java -> generateMap()");
             System.exit(1);

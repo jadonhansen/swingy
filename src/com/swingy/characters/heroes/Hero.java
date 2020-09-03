@@ -4,6 +4,7 @@ import com.swingy.artifacts.Artifact;
 import java.util.ArrayList;
 
 public abstract class Hero {
+    protected int ID;
     protected String name;
     protected String type;
     protected int level;
@@ -13,6 +14,10 @@ public abstract class Hero {
     protected int hitPoints;
     protected int[] currentPosition = new int[2];
     protected ArrayList<Artifact> artifacts;
+
+    public int getID() {
+        return ID;
+    }
 
     public String getName() {
         return name;

@@ -7,6 +7,13 @@ import java.util.ArrayList;
 public class Save {
 
     public void saveCharacter(Hero chosenHero, ArrayList<Hero> heroes) {
-        // save to file
+
+        for (int i = 0; i < heroes.size(); i++) {
+            if (heroes.get(i).getID() == chosenHero.getID()) {
+                heroes.set(i, chosenHero);
+                break;
+            }
+        }
+
     }
 }

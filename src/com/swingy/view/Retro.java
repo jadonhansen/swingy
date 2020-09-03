@@ -8,7 +8,7 @@ import com.swingy.gameplay.Move;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Display {
+public class Retro {
 
     private final Model model;
     private final Controller controller;
@@ -20,7 +20,7 @@ public class Display {
     private final String ANSI_CYAN = "\u001B[36m";
     private boolean lost = false;
 
-    public Display(Model model, Controller controller) {
+    public Retro(Model model, Controller controller) {
         this.model = model;
         this.controller = controller;
     }

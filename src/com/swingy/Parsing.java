@@ -15,15 +15,16 @@ public class Parsing {
         getSavedCharacters();
 
 //        for (Hero single: savedHeroes) {
-//            System.out.print(single.name + "\n");
-//            System.out.print(single.type + "\n");
-//            System.out.print(single.experience + "\n");
-//            System.out.print(single.level + "\n");
-//            System.out.print(single.hitPoints + "\n");
-//            System.out.print(single.attack + "\n");
-//            System.out.print(single.defence + "\n");
-//            if (single.artifacts != null) {
-//                for (Artifact hectic: single.artifacts) {
+//            System.out.print(single.getName() + "\n");
+//            System.out.print(single.getType() + "\n");
+//            System.out.print(single.getExperience() + "\n");
+//            System.out.print(single.getLevel() + "\n");
+//            System.out.print(single.getHitPoints() + "\n");
+//            System.out.print(single.getAttack() + "\n");
+//            System.out.print(single.getDefence() + "\n");
+//            if (single.getArtifacts() != null) {
+//                ArrayList<Artifact> temp = single.getArtifacts();
+//                for (Artifact hectic: temp) {
 //                    System.out.print(hectic.getAttack() + "\n");
 //                    System.out.print(hectic.getDefense() + "\n");
 //                    System.out.print(hectic.getHitPoints() + "\n");
@@ -62,8 +63,8 @@ public class Parsing {
                         String[] hitPointsInc = line.split(":");
                         saveToLocal(details, artifactType, defenceInc, attackInc, hitPointsInc);
                     }
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Error in parsing.java: " + e);
+                } catch (NullPointerException | IndexOutOfBoundsException e) {
+                    System.out.println("Error -> Parsing.java -> getSavedCharacters(): " + e);
                 }
             }
         } catch (FileNotFoundException e) {
@@ -77,43 +78,51 @@ public class Parsing {
 
         ArrayList<Artifact> artifacts = new ArrayList<>();
 
-        if (details[4].equals("0")) {
-            artifacts = null;
-        } else {
-            for (int i = 1; i < artifactType.length; i++) {
+        try {
+            if (details[4].equals("0")) {
+                artifacts = null;
+            } else {
+                for (int i = 1; i < artifactType.length; i++) {
 
-                switch (artifactType[i]) {
-                    case "Hammer" -> {
-                        Artifact hammer = new Hammer(Integer.parseInt(attackInc[i]), 0, 0);
-                        artifacts.add(hammer);
+                    switch (artifactType[i]) {
+                        case "Hammer" -> {
+                            Artifact hammer = new Hammer(Integer.parseInt(attackInc[i]), 0, 0);
+                            artifacts.add(hammer);
+                        }
+                        case "Lightsaber" -> {
+                            Artifact lightsaber = new Lightsaber(0, 0, Integer.parseInt(hitPointsInc[i]));
+                            artifacts.add(lightsaber);
+                        }
+                        case "Batmobile" -> {
+                            Artifact batmobile = new Batmobile(0, Integer.parseInt(defenceInc[i]), 0);
+                            artifacts.add(batmobile);
+                        }
+                        default -> System.out.println("Unknown artifact encountered from saves.txt! -> Parsing.java -> saveToLocal()");
                     }
-                    case "Lightsaber" -> {
-                        Artifact lightsaber = new Lightsaber(0, 0, Integer.parseInt(hitPointsInc[i]));
-                        artifacts.add(lightsaber);
-                    }
-                    case "Batmobile" -> {
-                        Artifact batmobile = new Batmobile(0, Integer.parseInt(defenceInc[i]), 0);
-                        artifacts.add(batmobile);
-                    }
-                    default -> System.out.println("Unknown artifact encountered from saves file!");
                 }
             }
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
+            System.out.println("Error while assigning artifacts -> Parsing.java -> saveToLocal(): " + e);
         }
 
-        switch (details[1]) {
-            case "Thor" -> {
-                Hero thor = new Thor(Integer.parseInt(details[2]), Integer.parseInt(details[3]), artifacts);
-                savedHeroes.add(thor);
+        try {
+            switch (details[1]) {
+                case "Thor" -> {
+                    Hero thor = new Thor(Integer.parseInt(details[2]), Integer.parseInt(details[3]), artifacts, Integer.parseInt(details[5]));
+                    savedHeroes.add(thor);
+                }
+                case "Jedi" -> {
+                    Hero jedi = new Jedi(Integer.parseInt(details[2]), Integer.parseInt(details[3]), artifacts, Integer.parseInt(details[5]));
+                    savedHeroes.add(jedi);
+                }
+                case "Batman" -> {
+                    Hero batman = new Batman(Integer.parseInt(details[2]), Integer.parseInt(details[3]), artifacts, Integer.parseInt(details[5]));
+                    savedHeroes.add(batman);
+                }
+                default -> System.out.println("Unknown hero encountered from saves.txt! -> Parsing.java -> saveToLocal()");
             }
-            case "Jedi" -> {
-                Hero jedi = new Jedi(Integer.parseInt(details[2]), Integer.parseInt(details[3]), artifacts);
-                savedHeroes.add(jedi);
-            }
-            case "Batman" -> {
-                Hero batman = new Batman(Integer.parseInt(details[2]), Integer.parseInt(details[3]), artifacts);
-                savedHeroes.add(batman);
-            }
-            default -> System.out.println("Unknown hero encountered from saves file!");
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
+            System.out.println("Error while accessing details -> Parsing.java -> saveToLocal(): " + e);
         }
     }
 }
