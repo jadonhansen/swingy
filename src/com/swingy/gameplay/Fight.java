@@ -74,8 +74,8 @@ public class Fight {
                 }
             }
 
-//            System.out.println("Hitpoints: " + hitPoints);
-//            System.out.println("Power: " + power);
+//            System.out.println("Hitpoints after blow: " + hitPoints);
+//            System.out.println("Power after strikeback: " + power);
 
             if (hitPoints <= 0) {
                 return false;
@@ -92,7 +92,7 @@ public class Fight {
         }
     }
 
-    // when the hero attacks it decreases the villains power by -> attack * 3
+    // when the hero attacks it decreases the villains power by -> attack * 1.5
     private int strikeBack() {
         int temp = power;
         return (int)(temp - (attack * 1.5));
@@ -104,9 +104,11 @@ public class Fight {
         int extraPoints;
 
         if (value == 0) {
+//            System.out.println("Luck was not on your side!: " + value);
             return 0;
         } else {
             extraPoints = (int) (Math.random() * (5 - 1 + 1) + 1);
+//            System.out.println("Luck is on your side!: " + extraPoints);
         }
         return extraPoints;
     }

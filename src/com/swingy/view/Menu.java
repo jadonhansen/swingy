@@ -34,6 +34,7 @@ public class Menu implements ActionListener {
 
         panel.setLayout(null);
 
+        // DOESN"T WORK
         JScrollPane scrollingArea = new JScrollPane(panel);
         scrollingArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         frame.add(scrollingArea);
