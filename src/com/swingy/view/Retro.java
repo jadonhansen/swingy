@@ -160,7 +160,7 @@ public class Retro {
                 }
             }
         } catch (NullPointerException | IndexOutOfBoundsException e) {
-            System.out.println("Error while displaying game interface: " + e);
+            System.out.println("Error while displaying game interface -> Retro.java -> printView(): " + e);
         }
     }
 

@@ -5,6 +5,8 @@ import com.swingy.Model;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Modern {
 
@@ -38,9 +40,9 @@ public class Modern {
         panel.setLayout(null);
 
         header();
-        stats();
+//        stats();
         extraButtons();
-        moveButtons();
+//        moveButtons();
         mapDisplay();
 
         frame.setPreferredSize(new Dimension(800, 700)); // calc dimensions based on map size
@@ -51,6 +53,8 @@ public class Modern {
 
     private void header() {
         header = new JLabel("Jadon Hansen - SWINGY - 2020");
+        header.setOpaque(true);
+        header.setBackground(Color.CYAN);
         header.setBounds(10,0,250,50);
         panel.add(header);
     }
@@ -60,7 +64,43 @@ public class Modern {
     }
 
     private void mapDisplay() {
-        // loop through map and display each line as a new label
+        char[][] temp = model.getMap();
+        ArrayList<String> mapArr = new ArrayList<>();
+        String line;
+
+        try {
+            for (char[] chars : temp) {
+                line = Arrays.toString(chars)
+                        .replace('[', ' ')
+                        .replace(',', ' ')
+                        .replace(']', ' ');
+
+                if (line.contains("J")) {
+                    String format = "";
+                    for (char aChar : chars) {
+                        if (aChar == 'J') {
+                            format += "  " + aChar + " ";
+                        } else {
+                            format += " " + aChar + " ";
+                        }
+                    }
+                    mapArr.add(format);
+                } else {
+                    mapArr.add(line);
+                }
+            }
+            for (int i = 0; i < mapArr.size(); i++) {
+                JLabel label = new JLabel(mapArr.get(i));
+                label.setBounds(10, 60 + (i * 20), 200, 20); // width is calculated from size of map
+                label.setOpaque(true);
+                label.setBackground(Color.GREEN);
+                panel.add(label);
+            }
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
+            System.out.println("Error while displaying game interface -> Modern.java -> mapDisplay(): " + e);
+        }
+        frame.validate();
+        frame.repaint();
     }
 
     private void choiceButtons() {
@@ -106,15 +146,19 @@ public class Modern {
         //set boundaries
         //show buttons
         up.addActionListener(a -> {
+            controller.move("W");
 
         });
         down.addActionListener(a -> {
+            controller.move("S");
 
         });
         left.addActionListener(a -> {
+            controller.move("A");
 
         });
         right.addActionListener(a -> {
+            controller.move("D");
 
         });
     }
