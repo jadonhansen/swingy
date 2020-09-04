@@ -100,6 +100,16 @@ public class Controller {
         }
     }
 
+    // swaps between the two views
+    public void swapView() {
+        if (model.getOption() == 1) {
+            model.setOption(0);
+        } else {
+            model.setOption(1);
+        }
+        displayGame();
+    }
+
     // saves character stats to the file
     public void save() {
         Save save = new Save();
