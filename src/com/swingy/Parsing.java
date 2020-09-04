@@ -14,24 +14,24 @@ public class Parsing {
 
         getSavedCharacters();
 
-//        for (Hero single: savedHeroes) {
-//            System.out.print(single.getID() + "\n");
-//            System.out.print(single.getName() + "\n");
-//            System.out.print(single.getType() + "\n");
-//            System.out.print(single.getExperience() + "\n");
-//            System.out.print(single.getLevel() + "\n");
-//            System.out.print(single.getHitPoints() + "\n");
-//            System.out.print(single.getAttack() + "\n");
-//            System.out.print(single.getDefence() + "\n");
-//            if (single.getArtifacts() != null) {
-//                ArrayList<Artifact> temp = single.getArtifacts();
-//                for (Artifact hectic: temp) {
-//                    System.out.print(hectic.getAttack() + "\n");
-//                    System.out.print(hectic.getDefense() + "\n");
-//                    System.out.print(hectic.getHitPoints() + "\n");
-//                }
-//            }
-//        }
+        for (Hero single: savedHeroes) {
+            System.out.print(single.getID() + "\n");
+            System.out.print(single.getName() + "\n");
+            System.out.print(single.getType() + "\n");
+            System.out.print(single.getExperience() + "\n");
+            System.out.print(single.getLevel() + "\n");
+            System.out.print(single.getHitPoints() + "\n");
+            System.out.print(single.getAttack() + "\n");
+            System.out.print(single.getDefence() + "\n");
+            if (single.getArtifacts() != null) {
+                ArrayList<Artifact> temp = single.getArtifacts();
+                for (Artifact hectic: temp) {
+                    System.out.print(hectic.getAttack() + "\n");
+                    System.out.print(hectic.getDefense() + "\n");
+                    System.out.print(hectic.getHitPoints() + "\n");
+                }
+            }
+        }
 
         return savedHeroes;
     }

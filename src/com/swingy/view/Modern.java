@@ -4,6 +4,7 @@ import com.swingy.Controller;
 import com.swingy.Model;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Modern {
 
@@ -29,8 +30,10 @@ public class Modern {
     }
 
     public void guiGenerate() {
-        frame.setSize(600, 500); // calc dimensions based on map size
+        frame = new JFrame();
+        frame.setSize(600, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        panel = new JPanel();
         frame.add(panel);
         panel.setLayout(null);
 
@@ -40,21 +43,24 @@ public class Modern {
         moveButtons();
         mapDisplay();
 
+        frame.setPreferredSize(new Dimension(800, 700)); // calc dimensions based on map size
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
     private void header() {
-
+        header = new JLabel("Jadon Hansen - SWINGY - 2020");
+        header.setBounds(10,0,250,50);
+        panel.add(header);
     }
 
     private void stats() {
-
+        stats = new JLabel("");
     }
 
     private void mapDisplay() {
-
+        // loop through map and display each line as a new label
     }
 
     private void choiceButtons() {
@@ -73,16 +79,26 @@ public class Modern {
         JButton quit = new JButton("Quit");
         JButton menu = new JButton("Quit to Menu");
         JButton console = new JButton("Console");
-        //set boundaries
-        //show buttons
-        quit.addActionListener(l -> {
 
+        console.setBounds(400, 15, 80, 30);
+        menu.setBounds(480, 15, 130, 30);
+        quit.setBounds(610, 15, 70, 30);
+
+        panel.add(quit);
+        panel.add(menu);
+        panel.add(console);
+
+        quit.addActionListener(l -> {
+            frame.dispose();
         });
         menu.addActionListener(l -> {
-
+            frame.dispose();
+            // go to menu
         });
         console.addActionListener(l -> {
-
+            frame.dispose();
+            // reset option to 0
+            // go to menu
         });
     }
 
