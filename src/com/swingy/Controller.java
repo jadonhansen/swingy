@@ -19,7 +19,7 @@ public class Controller {
 
     // calls menu view to display saved heroes
     public void displayOptions() {
-        Menu menu = new Menu(model.getHeroes(), this, model);
+        Menu menu = new Menu(model.getHeroes(), this);
         menu.displayMenu();
     }
 
