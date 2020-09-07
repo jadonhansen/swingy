@@ -104,11 +104,11 @@ public class Fight {
         int extraPoints;
 
         if (value == 0) {
-//            System.out.println("Luck was not on your side!: " + value);
+            System.out.println("Luck was not on your side!: " + value);
             return 0;
         } else {
             extraPoints = (int) (Math.random() * (5 - 1 + 1) + 1);
-//            System.out.println("Luck is on your side!: " + extraPoints);
+            System.out.println("Luck is on your side!: " + extraPoints);
         }
         return extraPoints;
     }
@@ -141,7 +141,6 @@ public class Fight {
         model.setMap(temp);
 
         model.getChosenHero().setCurrentPosition(villainPos[0], villainPos[1]);
-        System.out.println("In Fight.java -> Won the fight now call to remove villain: " + villainToFight.toString()); //
         controller.villainDefeated(villainToFight);
     };
 

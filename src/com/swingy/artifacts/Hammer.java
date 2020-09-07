@@ -12,7 +12,7 @@ public class Hammer extends Weapon implements Artifact {
 
     @Override
     public String toString() {
-        return "Hammer: Attack=" + attackIncrease + ", Defence=" + defenceIncrease + ", Hit Points=" + hitPointsIncrease;
+        return "Hammer";
     }
 
     @Override
