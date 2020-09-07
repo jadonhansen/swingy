@@ -3,6 +3,7 @@ package com.swingy.view;
 import com.swingy.Controller;
 import com.swingy.Model;
 import com.swingy.artifacts.Artifact;
+import com.swingy.characters.heroes.Hero;
 import com.swingy.gameplay.Move;
 
 import javax.swing.*;
@@ -14,21 +15,21 @@ public class Modern {
 
     private JPanel panel;
     private JFrame frame;
-    //    private JLabel stats;
-    private final JLabel question = new JLabel();
-    private final JLabel extra = new JLabel();
     private final JLabel info = new JLabel();
-    private final ArrayList<JLabel> labelMapArr = new ArrayList<>();
-    private final JButton menu = new JButton("Quit to Menu");
-    private final JButton console = new JButton("Console");
+    private final JLabel stats = new JLabel();
+    private final JLabel extra = new JLabel();
+    private final JLabel question = new JLabel();
     private final JButton up = new JButton("Up");
     private final JButton down = new JButton("Down");
     private final JButton left = new JButton("Left");
     private final JButton right = new JButton("Right");
-    private final JButton fight = new JButton("Fight");
     private final JButton run = new JButton("Run");
+    private final JButton fight = new JButton("Fight");
     private final JButton take = new JButton("Take");
     private final JButton drop = new JButton("Drop");
+    private final JButton console = new JButton("Console");
+    private final JButton menu = new JButton("Quit to Menu");
+    private final ArrayList<JLabel> labelMapArr = new ArrayList<>();
     private final Model model;
     private final Move moving;
     private final Controller controller;
@@ -38,7 +39,7 @@ public class Modern {
         this.model = model;
         this.controller = controller;
         this.moving = new Move();
-        roof = 60 + model.getMap().length * 20;
+        roof = 180 + model.getMap().length * 20;
     }
 
     public void guiGenerate() {
@@ -51,10 +52,10 @@ public class Modern {
 
         question.setBounds(10, roof + 40, 400, 20);
         info.setBounds(10, roof + 40, 400, 20);
-        extra.setBounds(10, roof + 20, 400, 20);
+        extra.setBounds(10, roof + 20, 600, 20);
 
         header();
-//        stats();
+        stats();
         moveButtons();
         fightRunButtons();
         takeDropButtons();
@@ -73,10 +74,24 @@ public class Modern {
         panel.add(header);
     }
 
-//    private void stats() {
-//        stats = new JLabel("");
-//        render();
-//    }
+    private void stats() {
+        Hero temp = model.getChosenHero();
+        String text = "<html>Hero: "+ temp.getName() + " (" + temp.getType() + ")" + "<br/>" +
+                "Level: " + temp.getLevel() + "<br/>" +
+                "Experience: " + temp.getExperience() + "<br/>" +
+                "Attack: " + temp.getAttack() + "<br/>" +
+                "Defense: " + temp.getDefence() + "<br/>" +
+                "Hit Points: " + temp.getHitPoints() + "<br/>";
+        if (temp.getArtifacts() != null) {
+            text += "Artifacts: " + temp.getArtifacts().size() + "</html>";
+        } else {
+            text += "Artifacts: 0</html>";
+        }
+        stats.setText(text);
+        stats.setBounds(10, 60, 250, 110);
+        panel.add(stats);
+        render();
+    }
 
     private void createMap(boolean firstPaint) {
         char[][] temp = model.getMap();
@@ -105,6 +120,7 @@ public class Modern {
                 }
             }
             displayMap(firstPaint, mapArr);
+            stats();
         } catch (NullPointerException e) {
             System.out.println("Error while creating map array -> Modern.java -> createMap() -> NullPointerException " + e);
         } catch (IndexOutOfBoundsException e) {
@@ -118,9 +134,7 @@ public class Modern {
                 for (int i = 0; i < mapArr.size(); i++) {
                     JLabel label = new JLabel();
                     label.setText(mapArr.get(i));
-                    label.setBounds(10, 60 + (i * 20), mapArr.size() * 20, 20);
-                    label.setOpaque(true);
-                    label.setBackground(Color.GREEN);
+                    label.setBounds(10, 180 + (i * 20), mapArr.size() * 20, 20);
                     labelMapArr.add(label);
                     panel.add(label);
                 }
@@ -206,7 +220,8 @@ public class Modern {
             question.setText("An artifact has been dropped! Do you want to take it or drop it?");
             panel.add(question);
 
-            extra.setText("Artifact info = ...");
+            extra.setText("Artifact: " + art.toString() + ", Attack Increase: " + art.getAttack() +
+                    ", Defence Increase: " + art.getDefense() + ", Hit Points Increase: " + art.getHitPoints());
             panel.add(extra);
 
             addTakeOrDropButtons();
@@ -292,8 +307,8 @@ public class Modern {
 
     private void borderCheck() {
         if (moving.reachedBorder(this.model)) {
+            stats();
             win();
-//            stats();
             controller.save(false);
         }
     }
@@ -301,6 +316,8 @@ public class Modern {
     private void win() {
         remove();
         JLabel win = new JLabel("You won this round!");
+        win.setOpaque(true);
+        win.setBackground(Color.GREEN);
         win.setBounds(10, roof + 40, 200, 20);
         panel.add(win);
     }
@@ -308,6 +325,8 @@ public class Modern {
     private void lose() {
         remove();
         JLabel lose = new JLabel("You lost this round, next time!");
+        lose.setOpaque(true);
+        lose.setBackground(Color.RED);
         lose.setBounds(10, roof + 40, 200, 20);
         panel.add(lose);
     }
