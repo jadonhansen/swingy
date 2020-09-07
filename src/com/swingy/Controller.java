@@ -88,16 +88,11 @@ public class Controller {
         }
         temp.add(artifact);
         model.getChosenHero().setArtifacts(temp);
-        System.out.println("\nADDING ARTIFACT to hero -> addArtifact() -> Controller.java: " + artifact.toString());
     }
 
     // if a villain is defeated it is removed from the existing array
     public void villainDefeated(Villain villain) {
         ArrayList<Villain> temp = model.getVillains();
-        System.out.println("\nREMOVING VILLAIN -> villainDefeated() -> Controller.java: " + villain.toString());
-        for (int i = 0; i < temp.size(); i++) {
-            System.out.println(i + ": " + temp.get(i).toString());
-        }
 
         if (temp.remove(villain)) {
             model.setVillains(temp);
@@ -117,13 +112,13 @@ public class Controller {
     }
 
     // saves character stats to the file
-    public void save() {
+    public void save(boolean displayMenu) {
         Save save = new Save();
         save.saveCharacter(model.getChosenHero(), model.getHeroes());
-        newGame();
+        newGame(displayMenu);
     }
 
-    public void newGame() {
+    public void newGame(boolean displayMenu) {
         Parsing parse = new Parsing();
         ArrayList<Hero> characters = parse.characters();
         model.setHeroes(characters);
@@ -132,6 +127,8 @@ public class Controller {
         model.setChosenHero(null);
         model.setArtifactDrop(null);
         model.setVillainToFight(null);
-        displayOptions();
+        if (displayMenu) {
+            displayOptions();
+        }
     }
 }

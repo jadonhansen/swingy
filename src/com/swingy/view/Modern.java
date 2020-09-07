@@ -49,6 +49,10 @@ public class Modern {
         frame.add(panel);
         panel.setLayout(null);
 
+        question.setBounds(10, roof + 40, 400, 20);
+        info.setBounds(10, roof + 40, 400, 20);
+        extra.setBounds(10, roof + 20, 400, 20);
+
         header();
 //        stats();
         moveButtons();
@@ -122,10 +126,8 @@ public class Modern {
                 }
             } else {
                 for (int i = 0; i < mapArr.size(); i++) {
-                    System.out.println(mapArr.get(i));
-                    labelMapArr.get(i).setText(mapArr.get(i)); //
+                    labelMapArr.get(i).setText(mapArr.get(i));
                 }
-                System.out.println("\n");
             }
         } catch (NullPointerException e) {
             System.out.println("Error while displaying game interface -> Modern.java -> mapDisplay(): -> NullPointerException " + e);
@@ -178,7 +180,6 @@ public class Modern {
             render();
             if (controller.run()) {
                 extra.setText("You're one lucky guy!");
-                extra.setBounds(10, roof + 20, 400, 20);
                 panel.add(extra);
                 addMoveButtons();
                 createMap(false);
@@ -191,7 +192,6 @@ public class Modern {
     private void fighting() {
         if (controller.fight()) {
             extra.setText("You won this battle...but I'll be back!");
-            extra.setBounds(10, roof + 20, 400, 20);
             panel.add(extra);
             artifactView();
         } else {
@@ -204,8 +204,10 @@ public class Modern {
             Artifact art = model.getArtifactDrop();
 
             question.setText("An artifact has been dropped! Do you want to take it or drop it?");
-            question.setBounds(10, roof + 40, 400, 20);
             panel.add(question);
+
+            extra.setText("Artifact info = ...");
+            panel.add(extra);
 
             addTakeOrDropButtons();
         } else {
@@ -219,31 +221,24 @@ public class Modern {
         drop.setBounds(80, roof + 70, 70, 30);
         take.addActionListener(e -> {
             controller.addArtifact(model.getArtifactDrop());
-
-            panel.remove(take);
-            panel.remove(drop);
-            panel.remove(question);
-            addMoveButtons();
-
-            info.setText("You obtained an artifact!");
-            info.setBounds(10, roof + 40, 400, 20);
-            panel.add(info);
-            render();
-            createMap(false);
+            takeDropBtnTasks("You obtained an artifact!");
         });
 
         drop.addActionListener(e -> {
-            panel.remove(take);
-            panel.remove(drop);
-            panel.remove(question);
-            addMoveButtons();
-
-            info.setText("No artifact obtained!");
-            info.setBounds(10, roof + 40, 400, 20);
-            panel.add(info);
-            render();
-            createMap(false);
+            takeDropBtnTasks("No artifact obtained!");
         });
+    }
+
+    private void takeDropBtnTasks(String infoStr) {
+        panel.remove(take);
+        panel.remove(drop);
+        panel.remove(question);
+        addMoveButtons();
+
+        info.setText(infoStr);
+        panel.add(info);
+        render();
+        createMap(false);
     }
 
     private void moveButtons() {
@@ -290,7 +285,6 @@ public class Modern {
         addFightOrRunButtons();
 
         question.setText("You have encountered a villain! Do you want to fight or run?");
-        question.setBounds(10, roof + 40, 400, 20);
         panel.add(question);
 
         render();
@@ -300,8 +294,22 @@ public class Modern {
         if (moving.reachedBorder(this.model)) {
             win();
 //            stats();
-            controller.save();
+            controller.save(false);
         }
+    }
+
+    private void win() {
+        remove();
+        JLabel win = new JLabel("You won this round!");
+        win.setBounds(10, roof + 40, 200, 20);
+        panel.add(win);
+    }
+
+    private void lose() {
+        remove();
+        JLabel lose = new JLabel("You lost this round, next time!");
+        lose.setBounds(10, roof + 40, 200, 20);
+        panel.add(lose);
     }
 
     private void addTakeOrDropButtons() {
@@ -324,20 +332,6 @@ public class Modern {
         render();
     }
 
-    private void win() {
-        remove();
-        JLabel win = new JLabel("You won this round!");
-        win.setBounds(10, roof + 40, 200, 20);
-        panel.add(win);
-    }
-
-    private void lose() {
-        remove();
-        JLabel lose = new JLabel("You lost this round, next time!");
-        lose.setBounds(10, roof + 40, 200, 20);
-        panel.add(lose);
-    }
-
     private void remove() {
         panel.remove(info);
         panel.remove(extra);
@@ -351,7 +345,6 @@ public class Modern {
         panel.remove(fight);
         panel.remove(run);
         panel.remove(console);
-        panel.remove(menu);
         render();
     }
 

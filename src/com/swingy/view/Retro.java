@@ -55,7 +55,7 @@ public class Retro {
             System.out.println(ANSI_GREEN + "You won this round!\n" + ANSI_RESET);
             System.out.println(ANSI_YELLOW + "Go to the menu to start on a new map." + ANSI_RESET);
         }
-        controller.save();
+        controller.save(true);
 
     }
 
