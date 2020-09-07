@@ -318,7 +318,7 @@ public class Modern {
         JLabel win = new JLabel("You won this round!");
         win.setOpaque(true);
         win.setBackground(Color.GREEN);
-        win.setBounds(10, roof + 40, 200, 20);
+        win.setBounds(10, roof + 40, 130, 20);
         panel.add(win);
     }
 

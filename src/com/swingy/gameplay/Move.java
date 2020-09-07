@@ -6,7 +6,7 @@ import com.swingy.characters.villains.Villain;
 public class Move {
 
     public boolean validateInput(String line) {
-        if (line.equals("w") || line.equals("a") || line.equals("s") || line.equals("d")) {
+        if (line.equals("w") || line.equals("a") || line.equals("s") || line.equals("d") || line.equals("M")) {
             return true;
         }
         return false;

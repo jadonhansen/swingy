@@ -33,13 +33,17 @@ public class Retro {
 
         while (!(moving.reachedBorder(this.model)) && !lost) {
             printView();
-            System.out.println(ANSI_CYAN + "\nWhat's your next move? w/a/s/d (Press ctrl+c to exit)" + ANSI_RESET);
+            System.out.println(ANSI_CYAN + "\nWhat's your next move? w/a/s/d (Press ctrl+c to exit and 'M' to quit to menu)" + ANSI_RESET);
             String line = scan.nextLine();
 
             if (!(moving.validateInput(line))) {
                 clearTerminal();
                 System.out.println(ANSI_YELLOW + "\nPlease use the characters 'w'/'a'/'s'/'d' to move.\n" + ANSI_RESET);
             } else {
+                if (line.equals("M")) {
+                    controller.swapView();
+                    return;
+                }
                 if (!(controller.move(line))) {
                     fightOrRun();
                 } else {
