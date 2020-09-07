@@ -48,7 +48,7 @@ public class Fight {
             }
         }
 
-//        System.out.println("Original Power: " + power);
+        System.out.println("Original Power: " + power);
 
         while (power >= 0) {
             if (power <= 50) {
@@ -74,8 +74,8 @@ public class Fight {
                 }
             }
 
-//            System.out.println("Hitpoints after blow: " + hitPoints);
-//            System.out.println("Power after strikeback: " + power);
+            System.out.println("Hitpoints after blow: " + hitPoints);
+            System.out.println("Power after strikeback: " + power);
 
             if (hitPoints <= 0) {
                 return false;
@@ -141,6 +141,7 @@ public class Fight {
         model.setMap(temp);
 
         model.getChosenHero().setCurrentPosition(villainPos[0], villainPos[1]);
+        System.out.println("In Fight.java -> Won the fight now call to remove villain: " + villainToFight.toString()); //
         controller.villainDefeated(villainToFight);
     };
 
@@ -196,5 +197,4 @@ public class Fight {
         }
         model.setArtifactDrop(chosenArtifact);
     };
-
 }

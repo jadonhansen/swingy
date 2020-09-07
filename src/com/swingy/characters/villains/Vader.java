@@ -1,5 +1,7 @@
 package com.swingy.characters.villains;
 
+import java.util.Arrays;
+
 public class Vader extends Villain {
 
     public Vader() {
@@ -9,6 +11,6 @@ public class Vader extends Villain {
 
     @Override
     public String toString() {
-        return "Vader";
+        return "Vader: Power=" + this.power + ", Current Position=" + Arrays.toString(this.currentPosition);
     }
 }

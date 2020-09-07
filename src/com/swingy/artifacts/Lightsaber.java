@@ -12,7 +12,7 @@ public class Lightsaber extends Helm implements Artifact {
 
     @Override
     public String toString() {
-        return "Lightsaber";
+        return "Lightsaber: Attack=" + attackIncrease + ", Defence=" + defenceIncrease + ", Hit Points=" + hitPointsIncrease;
     }
 
     @Override

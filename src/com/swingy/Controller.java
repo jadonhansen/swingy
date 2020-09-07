@@ -88,11 +88,17 @@ public class Controller {
         }
         temp.add(artifact);
         model.getChosenHero().setArtifacts(temp);
+        System.out.println("\nADDING ARTIFACT to hero -> addArtifact() -> Controller.java: " + artifact.toString());
     }
 
     // if a villain is defeated it is removed from the existing array
     public void villainDefeated(Villain villain) {
         ArrayList<Villain> temp = model.getVillains();
+        System.out.println("\nREMOVING VILLAIN -> villainDefeated() -> Controller.java: " + villain.toString());
+        for (int i = 0; i < temp.size(); i++) {
+            System.out.println(i + ": " + temp.get(i).toString());
+        }
+
         if (temp.remove(villain)) {
             model.setVillains(temp);
         } else {
