@@ -92,7 +92,7 @@ public class Retro {
 
     private void fight() {
         if (controller.fight()) {
-            System.out.println(ANSI_GREEN + "You won this battle..but I'll be back!\n" + ANSI_RESET);
+            System.out.println(ANSI_GREEN + "You won this battle...but I'll be back!\n" + ANSI_RESET);
             artifactView();
         } else {
             clearTerminal();
