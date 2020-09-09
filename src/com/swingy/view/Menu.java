@@ -20,7 +20,7 @@ public class Menu implements ActionListener {
     public Menu(ArrayList<Hero> heroes, Controller controller) {
         this.controller = controller;
         this.heroes = heroes;
-        roof = 110 + heroes.size() * 190;
+        roof = 150 + heroes.size() * 190;
     }
 
     public void displayMenu() {
@@ -31,11 +31,6 @@ public class Menu implements ActionListener {
 
         panel.setLayout(null);
 
-//        // DOESN"T WORK
-//        JScrollPane scrollingArea = new JScrollPane(panel);
-//        scrollingArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-//        frame.add(scrollingArea);
-
         heading();
         newCharacters();
         savedCharacters();
@@ -45,6 +40,11 @@ public class Menu implements ActionListener {
         } else {
             frame.setPreferredSize(new Dimension(600, 150));
         }
+
+//        JScrollPane scrollingArea = new JScrollPane(panel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+//        scrollingArea.setPreferredSize(new Dimension(600, roof));
+//        frame.add(scrollingArea);
+
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -106,13 +106,10 @@ public class Menu implements ActionListener {
                         "Hit Points Increase: " + heroes.get(i).getHitPoints() + "<br/>" +
                         "</html>");
 
-//                int k = i + 1;
-//                int y = (150 * k) - 80;
-
                 if (i == 0) {
                     label.setBounds(10, 150, 200, 130);
                 } else {
-                    label.setBounds(10, 150 + 30 + (i * 130), 200, 130);
+                    label.setBounds(10, 150 + (i * 30) + (i * 130), 200, 130);
                 }
                 panel.add(label);
 
@@ -121,7 +118,7 @@ public class Menu implements ActionListener {
                 if (i == 0) {
                     button.setBounds(10, 150 + 130, 150, 30);
                 } else {
-                    button.setBounds(10, 150 + 130 + 30 + (i * 130), 150, 30);
+                    button.setBounds(10, 150 + 130 + (i * 30) + (i * 130), 150, 30);
                 }
                 panel.add(button);
             }

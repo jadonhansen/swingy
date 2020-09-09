@@ -33,7 +33,7 @@ public class Retro {
 
         while (!(moving.reachedBorder(this.model)) && !lost) {
             printView();
-            System.out.println(ANSI_CYAN + "\nWhat's your next move? w/a/s/d (Press ctrl+c to exit and 'M' to quit to menu)" + ANSI_RESET);
+            System.out.println(ANSI_CYAN + "\nWhat's your next move? w/a/s/d (Press ctrl+c to exit OR 'M' to switch to GUI view)" + ANSI_RESET);
             String line = scan.nextLine();
 
             if (!(moving.validateInput(line))) {

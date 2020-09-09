@@ -75,22 +75,28 @@ public class Modern {
     }
 
     private void stats() {
-        Hero temp = model.getChosenHero();
-        String text = "<html>Hero: "+ temp.getName() + " (" + temp.getType() + ")" + "<br/>" +
-                "Level: " + temp.getLevel() + "<br/>" +
-                "Experience: " + temp.getExperience() + "<br/>" +
-                "Attack: " + temp.getAttack() + "<br/>" +
-                "Defense: " + temp.getDefence() + "<br/>" +
-                "Hit Points: " + temp.getHitPoints() + "<br/>";
-        if (temp.getArtifacts() != null) {
-            text += "Artifacts: " + temp.getArtifacts().size() + "</html>";
-        } else {
-            text += "Artifacts: 0</html>";
+        try {
+            Hero temp = model.getChosenHero();
+            String text = "<html>Hero: "+ temp.getName() + " (" + temp.getType() + ")" + "<br/>" +
+                    "Level: " + temp.getLevel() + "<br/>" +
+                    "Experience: " + temp.getExperience() + "<br/>" +
+                    "Attack: " + temp.getAttack() + "<br/>" +
+                    "Defense: " + temp.getDefence() + "<br/>" +
+                    "Hit Points: " + temp.getHitPoints() + "<br/>";
+            if (temp.getArtifacts() != null) {
+                text += "Artifacts: " + temp.getArtifacts().size() + "</html>";
+            } else {
+                text += "Artifacts: 0</html>";
+            }
+            stats.setText(text);
+            stats.setBounds(10, 60, 250, 110);
+            panel.add(stats);
+            render();
+        } catch (NullPointerException e) {
+            System.out.println("Error while creating stats -> Modern.java -> stats() -> NullPointerException " + e);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Error while creating stats -> Modern.java -> stats() -> IndexOutOfBoundsException " + e);
         }
-        stats.setText(text);
-        stats.setBounds(10, 60, 250, 110);
-        panel.add(stats);
-        render();
     }
 
     private void createMap(boolean firstPaint) {
@@ -119,8 +125,9 @@ public class Modern {
                     mapArr.add(line);
                 }
             }
-            displayMap(firstPaint, mapArr);
             stats();
+            displayMap(firstPaint, mapArr);
+            borderCheck();
         } catch (NullPointerException e) {
             System.out.println("Error while creating map array -> Modern.java -> createMap() -> NullPointerException " + e);
         } catch (IndexOutOfBoundsException e) {
@@ -149,7 +156,6 @@ public class Modern {
             System.out.println("Error while displaying game interface -> Modern.java -> mapDisplay() -> IndexOutOfBoundsException " + e);
         }
         render();
-        borderCheck();
     }
 
     private void extraButtons() {
@@ -307,7 +313,6 @@ public class Modern {
 
     private void borderCheck() {
         if (moving.reachedBorder(this.model)) {
-            stats();
             win();
             controller.save(false);
         }
