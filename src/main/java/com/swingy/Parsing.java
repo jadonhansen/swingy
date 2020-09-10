@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Parsing {
 
-    private ArrayList<Hero> savedHeroes = new ArrayList<>();
+    private final ArrayList<Hero> savedHeroes = new ArrayList<>();
 
     public ArrayList<Hero> characters() {
 
@@ -41,7 +41,7 @@ public class Parsing {
         String line;
 
         try {
-            FileReader fr = new FileReader("main/java/com/swingy/saves.txt");
+            FileReader fr = new FileReader("saves.txt");
             BufferedReader bf = new BufferedReader(fr);
 
             while ((line = bf.readLine()) != null) {

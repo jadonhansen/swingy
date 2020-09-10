@@ -27,7 +27,7 @@ public class Save {
         line = generateLine(heroes);
 
         try {
-            FileWriter fw = new FileWriter("main/java/com/swingy/saves.txt");
+            FileWriter fw = new FileWriter("saves.txt");
             fw.write(line);
             fw.close();
         } catch (IOException e) {
