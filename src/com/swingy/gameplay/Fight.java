@@ -104,11 +104,11 @@ public class Fight {
         int extraPoints;
 
         if (value == 0) {
-            System.out.println("Luck was not on your side!: " + value);
+            System.out.println("Luck was not on your side!: " + value); //
             return 0;
         } else {
             extraPoints = (int) (Math.random() * (5 - 1 + 1) + 1);
-            System.out.println("Luck is on your side!: " + extraPoints);
+            System.out.println("Luck is on your side!: " + extraPoints); //
         }
         return extraPoints;
     }
