@@ -166,7 +166,7 @@ public class Fight {
         int chance = rand.nextInt(101);
         Artifact chosenArtifact = null;
 
-        if (chance > 90) {
+        if (chance > 80) {
             int chosen = rand.nextInt(3);
             switch (chosen) {
                 case 0:
