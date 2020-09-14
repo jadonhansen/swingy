@@ -97,33 +97,42 @@ public class Menu implements ActionListener {
 
         try {
             for (int i = 0; i < heroes.size(); i++) {
-                JLabel label = new JLabel("<html>Name: " + heroes.get(i).getName() + "<br/>" +
+                String labelStr = "<html>Name: " + heroes.get(i).getName() + "<br/>" +
                         "Type: " + heroes.get(i).getType() + "<br/>" +
                         "Level: " + heroes.get(i).getLevel() + "<br/>" +
                         "Experience: " + heroes.get(i).getExperience() + "<br/>" +
                         "Attack Increase: " + heroes.get(i).getAttack() + "<br/>" +
                         "Defence Increase: " + heroes.get(i).getDefence() + "<br/>" +
-                        "Hit Points Increase: " + heroes.get(i).getHitPoints() + "<br/>" +
-                        "</html>");
+                        "Hit Points Increase: " + heroes.get(i).getHitPoints() + "<br/>";
+
+                if (heroes.get(i).getArtifacts() != null) {
+                    labelStr += "Artifacts: " + heroes.get(i).getArtifacts().size() + "<br/></html>";
+                } else {
+                    labelStr += "Artifacts: 0<br/></html>";
+                }
+
+                JLabel label = new JLabel(labelStr);
 
                 if (i == 0) {
-                    label.setBounds(10, 150, 200, 130);
+                    label.setBounds(10, 150, 200, 140);
                 } else {
-                    label.setBounds(10, 150 + (i * 30) + (i * 130), 200, 130);
+                    label.setBounds(10, 150 + (i * 30) + (i * 140), 200, 140);
                 }
                 panel.add(label);
 
                 JButton button = new JButton(heroes.get(i).getName() + " ID: " + heroes.get(i).getID());
                 button.addActionListener(this);
                 if (i == 0) {
-                    button.setBounds(10, 150 + 130, 150, 30);
+                    button.setBounds(10, 150 + 140, 150, 30);
                 } else {
-                    button.setBounds(10, 150 + 130 + (i * 30) + (i * 130), 150, 30);
+                    button.setBounds(10, 150 + 140 + (i * 30) + (i * 140), 150, 30);
                 }
                 panel.add(button);
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Error while making labels -> Menu.java -> displayMenu(): " + e);
+            System.out.println("Index err while making labels -> Menu.java -> displayMenu(): " + e);
+        } catch (NullPointerException e) {
+            System.out.println("Null err making labels -> Menu.java -> displayMenu(): " + e);
         }
     }
 
@@ -148,8 +157,10 @@ public class Menu implements ActionListener {
             if (notFound) {
                 System.out.println("Character with ID of '" + index + "' was not found! -> Menu.java -> actionPerformed()");
             }
-        } catch (IndexOutOfBoundsException | NullPointerException r) {
-            System.out.println("Error while assigning chosen character -> Menu.java -> actionPerformed(): " + r);
+        } catch (IndexOutOfBoundsException r) {
+            System.out.println("Index err while assigning chosen character -> Menu.java -> actionPerformed(): " + r);
+        } catch (NullPointerException r) {
+            System.out.println("Null err while assigning chosen character -> Menu.java -> actionPerformed(): " + r);
         }
 
     }

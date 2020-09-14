@@ -48,7 +48,7 @@ public class Fight {
             }
         }
 
-        System.out.println("Original Power: " + power);
+//        System.out.println("Original Power: " + power);
 
         while (power >= 0) {
             if (power <= 50) {
@@ -74,8 +74,8 @@ public class Fight {
                 }
             }
 
-            System.out.println("Hitpoints after blow: " + hitPoints);
-            System.out.println("Power after strikeback: " + power);
+//            System.out.println("Hitpoints after blow: " + hitPoints);
+//            System.out.println("Power after strikeback: " + power);
 
             if (hitPoints <= 0) {
                 return false;
@@ -104,11 +104,11 @@ public class Fight {
         int extraPoints;
 
         if (value == 0) {
-            System.out.println("Luck was not on your side!: " + value); //
+//            System.out.println("Luck was not on your side!: " + value);
             return 0;
         } else {
             extraPoints = (int) (Math.random() * (5 - 1 + 1) + 1);
-            System.out.println("Luck is on your side!: " + extraPoints); //
+//            System.out.println("Luck is on your side!: " + extraPoints);
         }
         return extraPoints;
     }

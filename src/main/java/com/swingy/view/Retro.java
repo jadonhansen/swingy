@@ -69,7 +69,7 @@ public class Retro {
     }
 
     private void fightOrRun() {
-        System.out.println(ANSI_CYAN + "You have encountered a villain! To fight press 'Y'. To attempt an escape press 'N'" + ANSI_RESET);
+        System.out.println(ANSI_CYAN + "You have encountered " + model.getVillainToFight() + "! To fight press 'Y'. To attempt an escape press 'N'" + ANSI_RESET);
         Scanner input = new Scanner(System.in);
         String ans = input.nextLine();
 

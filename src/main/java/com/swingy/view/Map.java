@@ -37,6 +37,7 @@ public class Map {
         }
         mapArr[startPos][startPos] = 'H';
         assignVillains();
+        cleanMap();
 
         model.setMap(mapArr);
 
@@ -53,7 +54,7 @@ public class Map {
     }
 
     private void assignVillains() {
-        int numVillains = mapSize;  //(int)Math.ceil(mapSize / 2) --> older algo
+        int numVillains = mapSize;
         int i = 0;
 
         Random rand = new Random();
@@ -95,5 +96,21 @@ public class Map {
             }
         }
         this.controller.setVillains(villains);
+    }
+
+    private void cleanMap() {
+        try {
+            for (int i = 0; i < mapArr.length; i++) {
+                for (int j = 0; j < mapArr.length; j++) {
+                    if (mapArr[i][j] == 'V' || mapArr[i][j] == 'J' || mapArr[i][j] == 'R') {
+                        mapArr[i][j] = '+';
+                    }
+                }
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Null err while cleaning map -> Map.java -> cleanMap(): " + e);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Index err while cleaning map -> Map.java -> cleanMap(): " + e);
+        }
     }
 }

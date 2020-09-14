@@ -1,7 +1,5 @@
 package com.swingy.characters.villains;
 
-import java.util.Arrays;
-
 public class Joker extends Villain {
 
     public Joker() {
@@ -11,6 +9,6 @@ public class Joker extends Villain {
 
     @Override
     public String toString() {
-        return "Joker: power=" + this.power + ", Current Position=" + Arrays.toString(this.currentPosition);
+        return "Joker: Power=" + this.power;
     }
 }

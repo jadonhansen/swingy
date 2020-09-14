@@ -50,7 +50,7 @@ public class Modern {
         frame.add(panel);
         panel.setLayout(null);
 
-        question.setBounds(10, roof + 40, 400, 20);
+        question.setBounds(10, roof + 40, 500, 20);
         info.setBounds(10, roof + 40, 400, 20);
         extra.setBounds(10, roof + 20, 600, 20);
 
@@ -305,7 +305,7 @@ public class Modern {
 
         addFightOrRunButtons();
 
-        question.setText("You have encountered a villain! Do you want to fight or run?");
+        question.setText("You have encountered " + model.getVillainToFight() + "! Do you want to fight or run?");
         panel.add(question);
 
         render();

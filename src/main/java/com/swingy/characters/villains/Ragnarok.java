@@ -1,7 +1,5 @@
 package com.swingy.characters.villains;
 
-import java.util.Arrays;
-
 public class Ragnarok extends Villain {
 
     public Ragnarok() {
@@ -11,6 +9,6 @@ public class Ragnarok extends Villain {
 
     @Override
     public String toString() {
-        return "Ragnarok: power=" + this.power + ", Current Position=" + Arrays.toString(this.currentPosition);
+        return "Ragnarok: Power=" + this.power;
     }
 }
