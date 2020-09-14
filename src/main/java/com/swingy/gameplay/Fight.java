@@ -148,16 +148,22 @@ public class Fight {
         int currXp = hero.getExperience();
         model.getChosenHero().setExperience(currXp + xp);
 
-        for (int i = 1; i <= 100; i++) {
-            if (i == 100) {
-                model.getChosenHero().setLevel(100);
-                break;
+        try {
+            for (int i = 1; i <= 100; i++) {
+                if (i == 100) {
+                    model.getChosenHero().setLevel(100);
+                    break;
+                }
+                int temp = i - 1;
+                if (model.getChosenHero().getExperience() <= (int)((i * 1000) + (Math.pow(temp, 2) * 450))) {
+                    model.getChosenHero().setLevel(i);
+                    break;
+                }
             }
-            int temp = i - 1;
-            if (model.getChosenHero().getExperience() <= (int)((i * 1000) + (Math.pow(temp, 2) * 450))) {
-                model.getChosenHero().setLevel(i);
-                break;
-            }
+        } catch (NullPointerException e) {
+            System.out.println("Null err in leveling up -> Fight.java -> levelUp(): " + e);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Index err in leveling up -> Fight.java -> levelUp(): " + e);
         }
     }
 
