@@ -69,21 +69,21 @@ public class Retro {
     }
 
     private void fightOrRun() {
-        System.out.println(ANSI_CYAN + "You have encountered " + model.getVillainToFight() + "! To fight press 'Y'. To attempt an escape press 'N'" + ANSI_RESET);
+        System.out.println(ANSI_CYAN + "You have encountered " + model.getVillainToFight() + "! To fight press 'y'. To attempt an escape press 'n'" + ANSI_RESET);
         Scanner input = new Scanner(System.in);
         String ans = input.nextLine();
 
-        while (!ans.equals("Y") && !ans.equals("N")) {
-            System.out.println(ANSI_YELLOW + "Either 'Y' or 'N' is accepted as input!" + ANSI_RESET);
+        while (!ans.equals("y") && !ans.equals("n")) {
+            System.out.println(ANSI_YELLOW + "Either 'y' or 'n' is accepted as input!" + ANSI_RESET);
             ans = input.nextLine();
         }
 
         switch (ans) {
-            case "Y":
+            case "y":
                 System.out.println(ANSI_RED + "Epic battles ensues..." + ANSI_RESET);
                 fight();
                 break;
-            case "N":
+            case "n":
                 if (controller.run()) {
                     System.out.println(ANSI_GREEN + "You're one lucky guy!\n" + ANSI_RESET);
                 } else {
@@ -113,23 +113,23 @@ public class Retro {
         if (model.getArtifactDrop() != null) {
             Artifact art = model.getArtifactDrop();
 
-            System.out.println(ANSI_CYAN + "\nArtifact dropped! Do you want to keep or drop the following artifact?\nPress 'Y' to keep and 'N' to drop." + ANSI_RESET);
+            System.out.println(ANSI_CYAN + "\nArtifact dropped! Do you want to keep or drop the following artifact?\nPress 'y' to keep and 'n' to drop." + ANSI_RESET);
             System.out.println("\nArtifact: " + art.toString() + "\nAttack Increase: " + art.getAttack());
             System.out.println("Defence: " + art.getDefense() + "\nHit Points Increase: " + art.getHitPoints() + "\n");
 
             String outcome = input.nextLine();
 
-            while (!outcome.equals("Y") && !outcome.equals("N")) {
-                System.out.println(ANSI_YELLOW + "Either 'Y' or 'N' is accepted as input!" + ANSI_RESET);
+            while (!outcome.equals("y") && !outcome.equals("n")) {
+                System.out.println(ANSI_YELLOW + "Either 'y' or 'n' is accepted as input!" + ANSI_RESET);
                 outcome = input.nextLine();
             }
 
             switch (outcome) {
-                case "Y" -> {
+                case "y" -> {
                     controller.addArtifact(art);
                     System.out.println(ANSI_GREEN + "Added '" + art.toString() + "' to inventory!" + ANSI_RESET);
                 }
-                case "N" -> System.out.println(ANSI_RED + "No artifact gained!" + ANSI_RESET);
+                case "n" -> System.out.println(ANSI_RED + "No artifact gained!" + ANSI_RESET);
             }
         }
     }
