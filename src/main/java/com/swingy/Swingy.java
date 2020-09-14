@@ -15,7 +15,7 @@ public class Swingy {
 
         try {
             Model model = new Model();
-            model.setHeroes(null);
+            model.setHeroes(characters);
 
             if (args[0].equals("console")) {
                 model.setOption(0);

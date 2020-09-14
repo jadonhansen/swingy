@@ -7,8 +7,6 @@ import javax.validation.ValidatorFactory;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import static org.junit.Assert.*;
-
 public class Validate {
 
     private static Validator validator;
