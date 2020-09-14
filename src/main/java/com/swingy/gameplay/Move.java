@@ -1,7 +1,7 @@
-package main.java.com.swingy.gameplay;
+package com.swingy.gameplay;
 
-import main.java.com.swingy.characters.villains.Villain;
-import main.java.com.swingy.Model;
+import com.swingy.characters.villains.Villain;
+import com.swingy.Model;
 
 public class Move {
 

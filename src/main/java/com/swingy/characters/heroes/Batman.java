@@ -1,6 +1,6 @@
-package main.java.com.swingy.characters.heroes;
+package com.swingy.characters.heroes;
 
-import main.java.com.swingy.artifacts.Artifact;
+import com.swingy.artifacts.Artifact;
 
 import java.util.ArrayList;
 import java.util.Date;

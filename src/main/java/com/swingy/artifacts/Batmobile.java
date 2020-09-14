@@ -1,4 +1,4 @@
-package main.java.com.swingy.artifacts;
+package com.swingy.artifacts;
 
 public class Batmobile extends Armor implements Artifact {
 

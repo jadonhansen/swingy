@@ -1,20 +1,25 @@
-package main.java.com.swingy;
+package com.swingy;
 
-import main.java.com.swingy.artifacts.Artifact;
-import main.java.com.swingy.characters.heroes.Hero;
-import main.java.com.swingy.characters.villains.Villain;
+import com.swingy.artifacts.Artifact;
+import com.swingy.characters.heroes.Hero;
+import com.swingy.characters.villains.Villain;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 
 public class Model {
 
+    @NotNull(message = "Heroes cannot be null")
     private ArrayList<Hero> heroes;
+
+    @NotNull(message = "Option cannot be null")
+    private int option;
+
     private ArrayList<Villain> villains;
     private Villain villainToFight;
     private Hero chosenHero;
     private Artifact artifactDrop;
     private char[][] mapArr;
-    private int option;
 
     // map
     public void setMap(char[][] map) {

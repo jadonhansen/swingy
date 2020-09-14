@@ -1,7 +1,7 @@
-package main.java.com.swingy.view;
+package com.swingy.view;
 
-import main.java.com.swingy.characters.heroes.*;
-import main.java.com.swingy.Controller;
+import com.swingy.characters.heroes.*;
+import com.swingy.Controller;
 
 import javax.swing.*;
 import java.awt.*;

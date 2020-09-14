@@ -1,4 +1,4 @@
-package main.java.com.swingy.gameplay;
+package com.swingy.gameplay;
 
 import java.util.Random;
 

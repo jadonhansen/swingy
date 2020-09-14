@@ -1,12 +1,14 @@
-package main.java.com.swingy.view;
+package com.swingy.view;
 
-import main.java.com.swingy.artifacts.Artifact;
-import main.java.com.swingy.characters.heroes.Hero;
-import main.java.com.swingy.gameplay.Move;
-import main.java.com.swingy.Controller;
-import main.java.com.swingy.Model;
+import com.swingy.artifacts.Artifact;
+import com.swingy.characters.heroes.Hero;
+import com.swingy.gameplay.Move;
+import com.swingy.Controller;
+import com.swingy.Model;
 
 import javax.swing.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,9 +32,13 @@ public class Modern {
     private final JButton console = new JButton("Console");
     private final JButton menu = new JButton("Quit to Menu");
     private final ArrayList<JLabel> labelMapArr = new ArrayList<>();
+    @NotNull
     private final Model model;
+    @NotNull
     private final Move moving;
+    @NotNull
     private final Controller controller;
+    @Min(280)
     private final int roof;
 
     public Modern(Model model, Controller controller) {

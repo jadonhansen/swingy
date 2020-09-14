@@ -1,6 +1,6 @@
-package main.java.com.swingy;
+package com.swingy;
 
-import main.java.com.swingy.characters.heroes.Hero;
+import com.swingy.characters.heroes.Hero;
 
 import java.util.ArrayList;
 
@@ -11,6 +11,8 @@ public class Swingy {
         Parsing parse = new Parsing();
         ArrayList<Hero> characters = parse.characters();
 
+        Validate validator = new Validate();
+
         try {
             Model model = new Model();
             model.setHeroes(characters);
@@ -20,9 +22,11 @@ public class Swingy {
             } else if (args[0].equals("gui")) {
                 model.setOption(1);
             } else {
-                System.out.println("Please provide a suitable option for running the game!\n'console' or 'gui'");
+                System.out.println("Please provide a suitable option for running the game! 'console' or 'gui'");
                 System.exit(1);
             }
+
+            validator.validateModel(model);
 
             Controller controller = new Controller(model);
             controller.displayOptions();

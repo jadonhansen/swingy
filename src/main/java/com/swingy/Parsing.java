@@ -1,7 +1,7 @@
-package main.java.com.swingy;
+package com.swingy;
 
-import main.java.com.swingy.artifacts.*;
-import main.java.com.swingy.characters.heroes.*;
+import com.swingy.artifacts.*;
+import com.swingy.characters.heroes.*;
 
 import java.io.*;
 import java.util.ArrayList;

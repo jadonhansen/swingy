@@ -1,17 +1,16 @@
-package main.java.com.swingy;
+package com.swingy;
 
-import main.java.com.swingy.artifacts.Artifact;
-import main.java.com.swingy.characters.heroes.Hero;
-import main.java.com.swingy.characters.villains.Villain;
-import main.java.com.swingy.gameplay.*;
-import main.java.com.swingy.view.*;
+import com.swingy.artifacts.Artifact;
+import com.swingy.characters.heroes.Hero;
+import com.swingy.characters.villains.Villain;
+import com.swingy.gameplay.*;
+import com.swingy.view.*;
 
 import java.util.ArrayList;
 
 public class Controller {
 
     private final Model model;
-    private final Map map = new Map();
 
     public Controller(Model model) {
         this.model = model;
@@ -31,7 +30,8 @@ public class Controller {
 
     // updates model with new map which is being generated
     public void generateMap() {
-        map.generateMap(model, this);
+        Map map = new Map(model, this);
+        map.generateMap();
         displayGame();
     }
 

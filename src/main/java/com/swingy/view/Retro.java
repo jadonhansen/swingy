@@ -1,16 +1,19 @@
-package main.java.com.swingy.view;
+package com.swingy.view;
 
-import main.java.com.swingy.artifacts.Artifact;
-import main.java.com.swingy.gameplay.Move;
-import main.java.com.swingy.Controller;
-import main.java.com.swingy.Model;
+import com.swingy.artifacts.Artifact;
+import com.swingy.gameplay.Move;
+import com.swingy.Controller;
+import com.swingy.Model;
 
+import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Retro {
 
+    @NotNull
     private final Model model;
+    @NotNull
     private final Controller controller;
 
     private final String ANSI_RESET = "\u001B[0m";

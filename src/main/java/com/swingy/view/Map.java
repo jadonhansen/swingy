@@ -1,23 +1,32 @@
-package main.java.com.swingy.view;
+package com.swingy.view;
 
-import main.java.com.swingy.characters.villains.*;
-import main.java.com.swingy.Controller;
-import main.java.com.swingy.Model;
+import com.swingy.characters.villains.*;
+import com.swingy.Controller;
+import com.swingy.Model;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Map {
 
-    private Controller controller;
+    @NotNull
+    private final Controller controller;
+    @NotNull
+    private final Model model;
     private char[][] mapArr;
+    @Min(5)
     private int mapSize;
     private int startPos;
-    private ArrayList<Villain> villains = new ArrayList<>();
+    private final ArrayList<Villain> villains = new ArrayList<>();
 
-    public void generateMap(Model model, Controller controller) {
-
+    public Map(Model model, Controller controller) {
         this.controller = controller;
+        this.model = model;
+    }
+
+    public void generateMap() {
 
         int level= model.getChosenHero().getLevel();
         mapSize = (level-1)*5+10-(level%2);

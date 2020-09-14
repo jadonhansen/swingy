@@ -1,4 +1,4 @@
-package main.java.com.swingy.characters.villains;
+package com.swingy.characters.villains;
 
 import java.util.Arrays;
 

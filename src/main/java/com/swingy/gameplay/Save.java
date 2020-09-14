@@ -1,6 +1,6 @@
-package main.java.com.swingy.gameplay;
+package com.swingy.gameplay;
 
-import main.java.com.swingy.characters.heroes.Hero;
+import com.swingy.characters.heroes.Hero;
 
 import java.io.FileWriter;
 import java.io.IOException;

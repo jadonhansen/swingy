@@ -1,24 +1,32 @@
-package main.java.com.swingy.gameplay;
+package com.swingy.gameplay;
 
-import main.java.com.swingy.artifacts.*;
-import main.java.com.swingy.characters.heroes.Hero;
-import main.java.com.swingy.characters.villains.Villain;
-import main.java.com.swingy.Controller;
-import main.java.com.swingy.Model;
+import com.swingy.artifacts.*;
+import com.swingy.characters.heroes.Hero;
+import com.swingy.characters.villains.Villain;
+import com.swingy.Controller;
+import com.swingy.Model;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Fight {
 
+    @NotNull
     private final Model model;
+    @NotNull
     private final Controller controller;
     private Villain villainToFight;
-    private ArrayList<Artifact> artifacts;
-    private Hero hero;
+    private final ArrayList<Artifact> artifacts;
+    @NotNull
+    private final Hero hero;
+    @NotNull
     private int power;
+    @NotNull
     private int attack;
+    @NotNull
     private int defence;
+    @NotNull
     private int hitPoints;
 
     public Fight(Model model, Controller controller) {
