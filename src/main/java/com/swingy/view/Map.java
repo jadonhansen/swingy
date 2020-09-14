@@ -4,19 +4,14 @@ import com.swingy.characters.villains.*;
 import com.swingy.Controller;
 import com.swingy.Model;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Map {
 
-    @NotNull
     private final Controller controller;
-    @NotNull
     private final Model model;
     private char[][] mapArr;
-    @Min(5)
     private int mapSize;
     private int startPos;
     private final ArrayList<Villain> villains = new ArrayList<>();

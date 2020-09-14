@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class Model {
 
-    @NotNull(message = "Heroes cannot be null")
+    @NotNull
     private ArrayList<Hero> heroes;
 
-    @NotNull(message = "Option cannot be null")
+    @NotNull
     private int option;
 
     private ArrayList<Villain> villains;

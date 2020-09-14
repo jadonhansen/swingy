@@ -22,9 +22,8 @@ public class Validate {
         try {
             Set<ConstraintViolation<Model>> constraintViolations = validator.validate( model );
             if (constraintViolations.size() != 0) {
-                System.out.println("problemssss");
+                System.out.println("Constraint violation found -> Validate.java -> validateModel(): ");
             }
-//            assertEquals( 0, constraintViolations.size());
         } catch (NoSuchElementException e) {
             System.out.println("No such element found on class -> Validate.java -> validateModel(): " + e);
         }

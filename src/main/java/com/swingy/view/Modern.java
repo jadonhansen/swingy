@@ -7,8 +7,6 @@ import com.swingy.Controller;
 import com.swingy.Model;
 
 import javax.swing.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,13 +30,9 @@ public class Modern {
     private final JButton console = new JButton("Console");
     private final JButton menu = new JButton("Quit to Menu");
     private final ArrayList<JLabel> labelMapArr = new ArrayList<>();
-    @NotNull
     private final Model model;
-    @NotNull
     private final Move moving;
-    @NotNull
     private final Controller controller;
-    @Min(280)
     private final int roof;
 
     public Modern(Model model, Controller controller) {

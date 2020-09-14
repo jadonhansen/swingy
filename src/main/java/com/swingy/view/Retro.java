@@ -5,15 +5,12 @@ import com.swingy.gameplay.Move;
 import com.swingy.Controller;
 import com.swingy.Model;
 
-import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Retro {
 
-    @NotNull
     private final Model model;
-    @NotNull
     private final Controller controller;
 
     private final String ANSI_RESET = "\u001B[0m";

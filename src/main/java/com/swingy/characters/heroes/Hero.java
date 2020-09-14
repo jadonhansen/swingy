@@ -2,28 +2,18 @@ package com.swingy.characters.heroes;
 
 import com.swingy.artifacts.Artifact;
 
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 
 public abstract class Hero {
 
-    @NotNull
     protected int ID;
-    @NotNull
     protected String name;
-    @NotNull
     protected String type;
-    @NotNull
     protected int level;
-    @NotNull
     protected int experience;
-    @NotNull
     protected int attack;
-    @NotNull
     protected int defence;
-    @NotNull
     protected int hitPoints;
-    @NotNull
     protected int[] currentPosition = new int[2];
     protected ArrayList<Artifact> artifacts;
 
