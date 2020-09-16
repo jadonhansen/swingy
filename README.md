@@ -1,7 +1,7 @@
 # swingy
 Second Java project - 2nd Year 1st Semester (Java Module) at WeThinkCode
 
-#####Grade Achieved: 113%
+##### Grade Achieved: 113%
 
 Requirements:
 1. Java
